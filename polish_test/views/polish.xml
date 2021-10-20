@@ -4,7 +4,8 @@
         <field name="name">Clients</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">polish.test</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+<!--        <field name="view_id" ref="purchase.view_polish_test_kanban_view"/> -->
         <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -22,7 +23,91 @@
                 <field name="age"/>
                 <field name="gender"/>
                 <field name="note"/>
+                <field name="active"/>
+                <field name="color"/>
+                <field name="responsible_id"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="polish_test_kanban_view" model="ir.ui.view">
+        <field name="name">polish.test.kanban</field>
+        <field name="model">polish.test</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class ='oe_kanban_details'>
+                            <ul>
+                                <li>Name:<strong><span><field name="name"/></span></strong>
+                                </li>
+                                <li>Age:<field name="age"/>
+                                </li>
+                                <li>Gender:<field name="gender"/>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="polish_test_form_view" model="ir.ui.view">
+        <field name="name">polish.test.form</field>
+        <field name="model">polish.test</field>
+        <field name="arch" type="xml">
+            <form string="Info about polish test">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="active"/>
+                    <field name="color"/>
+                    <field name="responsible_id"/>
+                </group>
+                <group>
+                    <field name="date"/>
+                    <field name="amount" widget="monetary"/>
+                    <field name="note"/>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="polish_test_search_view" model="ir.ui.view">
+        <field name="name">polish.test.search</field>
+        <field name="model">polish.test</field>
+        <field name="arch" type="xml">
+                <search string="Search by name/age/gender">
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                </search>
+            </field>
+        </record>
+
+
+    <record id="polish_test_activity_view" model="ir.ui.view">
+        <field name="name">polish.test.activity</field>
+        <field name="model">polish.test</field>
+        <field name="arch" type="xml">
+            <activity string="Info about polish test">
+<!--                    <field name="id"/>-->
+                    <templates>
+                        <div t-name="activity-box">
+                            <div>
+                                <field name="name" display="full"/>
+                            </div>
+                        </div>
+                    </templates>
+            </activity>
         </field>
     </record>
 
