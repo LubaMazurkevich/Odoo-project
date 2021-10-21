@@ -13,7 +13,6 @@
         </field>
     </record>
 
-
     <record id="polish_test_kanban_view" model="ir.ui.view">
         <field name="name">polish.test.kanban</field>
         <field name="model">polish.test</field>
@@ -23,14 +22,12 @@
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class='oe_kanban_details'>
-                                <!--                            <ul>-->
-                                <!--                                <li>Name:<strong><span><field name="name"/></span></strong>-->
-                                <!--                                </li>-->
-                                <!--                                <li>Age:<field name="age"/>-->
-                                <!--                                </li>-->
-                                <!--                                <li>Gender:<field name="gender"/>-->
-                                <!--                                </li>-->
-                                <!--                            </ul>-->
+                                <ul>
+                                    <li>Text:<strong><span><field name="text"/></span></strong>
+                                    </li>
+                                    <li>Boolean:<field name="boolean1"/>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </t>
@@ -46,15 +43,6 @@
         <field name="arch" type="xml">
             <form string="Info about polish test">
                 <sheet>
-                    <group>
-                        <!--                    <field name="name"/>-->
-                        <!--                    <field name="age"/>-->
-                        <!--                    <field name="gender"/>-->
-                        <!--                    <field name="active"/>-->
-                        <!--                    <field name="color"/>-->
-                        <!--                    <field name="respartner_id"/>-->
-                        <!--                    <field name="resuser_id"/>-->
-                        <!--                    <field name="polish_test_ids"/>-->
                         <group>
                             <field name="text"/>
                             <field name="check1"/>
@@ -74,7 +62,6 @@
                             <field name="select1"/>
                             <field name="select2"/>
                         </group>
-                    </group>
                 </sheet>
             </form>
         </field>
@@ -85,15 +72,6 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <tree string="Info about polish test">
-                <!--                <field name="name"/>-->
-                <!--                <field name="age"/>-->
-                <!--                <field name="gender"/>-->
-                <!--                <field name="active"/>-->
-                <!--                <field name="color"/>-->
-                <!--                <field name="respartner_id"/>-->
-                <!--                <field name="resuser_id"/>-->
-                <!--                <field name="polish_test_ids"/>-->
-
                 <field name="boolean1"/>
                 <field name="boolean2"/>
                 <field name="boolean3"/>
@@ -112,24 +90,23 @@
         </field>
     </record>
 
-<!--    <record id="polish_test_search_view" model="ir.ui.view">-->
-<!--        <field name="name">polish.test.search</field>-->
-<!--        <field name="model">polish.test</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search string="Search by name/age/gender">-->
-<!--                &lt;!&ndash;                    <field name="name"/>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <field name="age"/>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <field name="gender"/>&ndash;&gt;-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="polish_test_search_view" model="ir.ui.view">
+        <field name="name">polish.test.search</field>
+        <field name="model">polish.test</field>
+        <field name="arch" type="xml">
+            <search string="Search by name/age/gender">
+                <field name="select1"/>
+                <field name="select2"/>
+            </search>
+        </field>
+    </record>
 
     <record id="polish_test_calendar_view" model="ir.ui.view">
         <field name="name">polish.test.calendar</field>
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <calendar string="Polish Test Calendar" date_start="create_date">
-                <!--                <field name="name"/>-->
+                <field name="select1"/>
             </calendar>
         </field>
     </record>
@@ -142,7 +119,7 @@
                 <templates>
                     <div t-name="activity-box">
                         <div>
-                            <!--                                <field name="name" display="full"/>-->
+                            <field name="text" display="full"/>
                         </div>
                     </div>
                 </templates>
@@ -155,23 +132,11 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <graph string="Polish test graph">
-                <!--                <field name="age"/>-->
+                <field name="select1"/>
             </graph>
         </field>
     </record>
 
-
-    <record id="polish_form_view" model="ir.ui.view">
-        <field name="name">polish.form</field>
-        <field name="model">polish</field>
-        <field name="arch" type="xml">
-            <form string="Polish">
-                <sheet>
-                    <!--                            <field name="name"/>-->
-                </sheet>
-            </form>
-        </field>
-    </record>
 
     <menuitem
             id="polish_test_root_item"
@@ -181,12 +146,5 @@
 </odoo>
 
 
-        <!--    <t t-name="website.components.switch">-->
-        <!--        <label class="o_switch" t-att-for="id">-->
-        <!--            <input type="checkbox" t-att-id="id" t-att-checked="checked ? 'checked' : undefined"/>-->
-        <!--            <span/>-->
-        <!--            <div t-if="label"><t t-esc="label"/></div>-->
-        <!--        </label>-->
-        <!--    </t>-->
 
 

@@ -3,26 +3,9 @@ from datetime import datetime
 
 
 class PolishTest(models.Model):
+
     _name = "polish.test"
     _description ="Polish Test"
-    # _inherit = ['mail.thread', 'mail.activity.mixin']
-    #
-    # name = fields.Char(string='Name', required=True)
-    # age = fields.Integer(string='Age')
-    # gender = fields.Selection([
-    #     ("male", "Male"),
-    #     ("female", "Female"),
-    #     ("other", "other"),
-    # ], required=True, default='male')
-    # note = fields.Text(string="Description")
-    # date = fields.Date('Date', required=True, default=fields.Date.context_today)
-    # amount = fields.Float('Amount', required=True)
-    # active = fields.Boolean(default=True)
-    # color = fields.Integer(string='Color Index')
-    # respartner_id = fields.Many2one(comodel_name="res.partner", string="Responsible partner")
-    # resuser_id = fields.Many2many('res.users', string='Responsible user')
-    # polish_test_ids = fields.One2many(comodel_name="polish", inverse_name='test_id', string="polish")
-
     text = fields.Text(string="Text")
     select1 = fields.Selection([
             ("1", "1"),
@@ -48,15 +31,6 @@ class PolishTest(models.Model):
     check2 = fields.Boolean(string="Test 2")
     check_all = fields.Boolean(string="Select all")
 
-    # vehicle_type = fields.Selection(related='model_id.vehicle_type')
-
-    class Polish(models.Model):
-        _name = "polish"
-        _description = "Polish"
-
-        test_id = fields.Many2one(comodel_name="polish.test", string="Test")
-        name = fields.Char(string="Name")
-
     @api.onchange('check_all')
     def _onchange_check_all(self):
         if self.check_all:
@@ -66,13 +40,16 @@ class PolishTest(models.Model):
             self.check1 = False
             self.check2 = False
 
-    # @api.onchange('check1')
-    # def _onchange_check_all(self):
-    #     if self.check1:
-    #
-    #     else:
-
-
+    @api.onchange('check2', 'check1')
+    def _onchange_check1_check2(self):
+        if self.check1 == True and self.check2 != True:
+            self.text = f"[{self._fields['check1'].string}]"
+        elif self.check2 == True and self.check1 != True:
+            self.text = {self._fields['check2'].string}
+        elif self.check2 and self.check1:
+            self.text = f"[{self._fields['check1'].string}] { {self._fields['check2'].string} }"
+        else:
+            self.text = ''
 
 
 
