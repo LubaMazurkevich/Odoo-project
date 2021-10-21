@@ -10,7 +10,7 @@ class PolishTest(models.Model):
     name = fields.Char(string='Name', required=True)
     age = fields.Integer(string='Age')
     gender = fields.Selection([
-        ('male', "Male"),
+        ("male", "Male"),
         ("female", "Female"),
         ("other", "other"),
     ], required=True, default='male')
@@ -19,8 +19,16 @@ class PolishTest(models.Model):
     amount = fields.Float('Amount', required=True)
     active = fields.Boolean(default=True)
     color = fields.Integer(string='Color Index')
-    respartner_id = fields.Many2one("res.partner", string="Responsible partner")
+    respartner_id = fields.Many2one(comodel_name="res.partner", string="Responsible partner")
     resuser_id = fields.Many2many('res.users', string='Responsible user')
+    polish_test_ids = fields.One2many(comodel_name="polish", inverse_name='test_id', string="polish")
+
+    class Polish(models.Model):
+        _name = "polish"
+        _description = "Polish"
+
+        test_id = fields.Many2one(comodel_name="polish.test", string="Test")
+        name = fields.Char(string="Name")
 
 
 

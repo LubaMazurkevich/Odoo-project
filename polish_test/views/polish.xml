@@ -70,6 +70,7 @@
                     <field name="color"/>
                     <field name="respartner_id"/>
                     <field name="resuser_id"/>
+                    <field name="polish_test_ids"/>
                 </group>
                 <group>
                     <field name="date"/>
@@ -127,6 +128,19 @@
                 <field name="age"/>
             </graph>
         </field>
+    </record>
+
+
+    <record id="polish_form_view" model="ir.ui.view">
+            <field name="name">polish.form</field>
+            <field name="model">polish</field>
+            <field name="arch" type="xml">
+                <form string="Polish">
+                        <sheet>
+                            <field name="name"/>
+                        </sheet>
+                </form>
+            </field>
     </record>
 
     <menuitem
