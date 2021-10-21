@@ -11,12 +11,12 @@ class PolishTest(models.Model):
             ("1", "1"),
             ("2", "2"),
             ("3", "3"),
-    ], required=True, default='1')
+    ], required=True, default="1")
     select2 = fields.Selection([
             ("4", "4"),
             ("5", "5"),
             ("6", "6"),
-    ], required=True, default='4')
+    ], required=True, default="4")
     boolean1 = fields.Boolean(string="1")
     boolean2 = fields.Boolean(string="2")
     boolean3 = fields.Boolean(string="3")
@@ -31,7 +31,7 @@ class PolishTest(models.Model):
     check2 = fields.Boolean(string="Test 2")
     check_all = fields.Boolean(string="Select all")
 
-    @api.onchange('check_all')
+    @api.onchange("check_all")
     def _onchange_check_all(self):
         if self.check_all:
             self.check1 = True
@@ -40,7 +40,7 @@ class PolishTest(models.Model):
             self.check1 = False
             self.check2 = False
 
-    @api.onchange('check2', 'check1')
+    @api.onchange("check2", "check1")
     def _onchange_check1_check2(self):
         if self.check1 == True and self.check2 != True:
             self.text = f"[{self._fields['check1'].string}]"
@@ -49,7 +49,7 @@ class PolishTest(models.Model):
         elif self.check2 and self.check1:
             self.text = f"[{self._fields['check1'].string}] { {self._fields['check2'].string} }"
         else:
-            self.text = ''
+            self.text = " "
 
 
 
