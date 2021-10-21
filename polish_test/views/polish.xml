@@ -13,22 +13,6 @@
         </field>
     </record>
 
-    <record id="polish_test_tree_view" model="ir.ui.view">
-        <field name="name">polish.test.tree</field>
-        <field name="model">polish.test</field>
-        <field name="arch" type="xml">
-            <tree string="Info about polish test">
-                <field name="name"/>
-                <field name="age"/>
-                <field name="gender"/>
-                <field name="note"/>
-                <field name="active"/>
-                <field name="color"/>
-                <field name="respartner_id"/>
-                <field name="resuser_id"/>
-            </tree>
-        </field>
-    </record>
 
     <record id="polish_test_kanban_view" model="ir.ui.view">
         <field name="name">polish.test.kanban</field>
@@ -38,15 +22,15 @@
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
-                            <div class ='oe_kanban_details'>
-                            <ul>
-                                <li>Name:<strong><span><field name="name"/></span></strong>
-                                </li>
-                                <li>Age:<field name="age"/>
-                                </li>
-                                <li>Gender:<field name="gender"/>
-                                </li>
-                            </ul>
+                            <div class='oe_kanban_details'>
+                                <!--                            <ul>-->
+                                <!--                                <li>Name:<strong><span><field name="name"/></span></strong>-->
+                                <!--                                </li>-->
+                                <!--                                <li>Age:<field name="age"/>-->
+                                <!--                                </li>-->
+                                <!--                                <li>Gender:<field name="gender"/>-->
+                                <!--                                </li>-->
+                                <!--                            </ul>-->
                             </div>
                         </div>
                     </t>
@@ -61,45 +45,91 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <form string="Info about polish test">
-            <sheet>
-                <group>
-                    <field name="name"/>
-                    <field name="age"/>
-                    <field name="gender"/>
-                    <field name="active"/>
-                    <field name="color"/>
-                    <field name="respartner_id"/>
-                    <field name="resuser_id"/>
-                    <field name="polish_test_ids"/>
-                </group>
-                <group>
-                    <field name="date"/>
-                    <field name="amount" widget="monetary"/>
-                    <field name="note"/>
-                </group>
-            </sheet>
+                <sheet>
+                    <group>
+                        <!--                    <field name="name"/>-->
+                        <!--                    <field name="age"/>-->
+                        <!--                    <field name="gender"/>-->
+                        <!--                    <field name="active"/>-->
+                        <!--                    <field name="color"/>-->
+                        <!--                    <field name="respartner_id"/>-->
+                        <!--                    <field name="resuser_id"/>-->
+                        <!--                    <field name="polish_test_ids"/>-->
+                        <group>
+                            <field name="text"/>
+                            <field name="check1"/>
+                            <field name="check2"/>
+                            <field name="check_all"/>
+                        </group>
+                        <group class="oe_read_only">
+                            <field name="boolean1"/>
+                            <field name="boolean2"/>
+                            <field name="boolean3"/>
+                            <field name="boolean4"/>
+                            <field name="boolean5"/>
+                            <field name="boolean6"/>
+                            <field name="boolean7"/>
+                            <field name="boolean8"/>
+                            <field name="boolean9"/>
+                            <field name="select1"/>
+                            <field name="select2"/>
+                        </group>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
 
-    <record id="polish_test_search_view" model="ir.ui.view">
-        <field name="name">polish.test.search</field>
+    <record id="polish_test_tree_view" model="ir.ui.view">
+        <field name="name">polish.test.tree</field>
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
-                <search string="Search by name/age/gender">
-                    <field name="name"/>
-                    <field name="age"/>
-                    <field name="gender"/>
-                </search>
-            </field>
-        </record>
+            <tree string="Info about polish test">
+                <!--                <field name="name"/>-->
+                <!--                <field name="age"/>-->
+                <!--                <field name="gender"/>-->
+                <!--                <field name="active"/>-->
+                <!--                <field name="color"/>-->
+                <!--                <field name="respartner_id"/>-->
+                <!--                <field name="resuser_id"/>-->
+                <!--                <field name="polish_test_ids"/>-->
+
+                <field name="boolean1"/>
+                <field name="boolean2"/>
+                <field name="boolean3"/>
+                <field name="boolean4"/>
+                <field name="boolean5"/>
+                <field name="boolean6"/>
+                <field name="boolean7"/>
+                <field name="boolean8"/>
+                <field name="boolean9"/>
+
+                <field name="text"/>
+                <field name="check1"/>
+                <field name="check2"/>
+                <field name="check_all"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    <record id="polish_test_search_view" model="ir.ui.view">-->
+<!--        <field name="name">polish.test.search</field>-->
+<!--        <field name="model">polish.test</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Search by name/age/gender">-->
+<!--                &lt;!&ndash;                    <field name="name"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <field name="age"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <field name="gender"/>&ndash;&gt;-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="polish_test_calendar_view" model="ir.ui.view">
         <field name="name">polish.test.calendar</field>
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
-            <calendar string="Polish Test Calendar" date_start="create_date" >
-                <field name="name"/>
+            <calendar string="Polish Test Calendar" date_start="create_date">
+                <!--                <field name="name"/>-->
             </calendar>
         </field>
     </record>
@@ -109,38 +139,38 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <activity string="Info about polish test">
-                    <templates>
-                        <div t-name="activity-box">
-                            <div>
-                                <field name="name" display="full"/>
-                            </div>
+                <templates>
+                    <div t-name="activity-box">
+                        <div>
+                            <!--                                <field name="name" display="full"/>-->
                         </div>
-                    </templates>
+                    </div>
+                </templates>
             </activity>
         </field>
     </record>
 
     <record id="polish_test_graph_view" model="ir.ui.view">
-       <field name="name">polish.test.graph</field>
-       <field name="model">polish.test</field>
-       <field name="arch" type="xml">
+        <field name="name">polish.test.graph</field>
+        <field name="model">polish.test</field>
+        <field name="arch" type="xml">
             <graph string="Polish test graph">
-                <field name="age"/>
+                <!--                <field name="age"/>-->
             </graph>
         </field>
     </record>
 
 
     <record id="polish_form_view" model="ir.ui.view">
-            <field name="name">polish.form</field>
-            <field name="model">polish</field>
-            <field name="arch" type="xml">
-                <form string="Polish">
-                        <sheet>
-                            <field name="name"/>
-                        </sheet>
-                </form>
-            </field>
+        <field name="name">polish.form</field>
+        <field name="model">polish</field>
+        <field name="arch" type="xml">
+            <form string="Polish">
+                <sheet>
+                    <!--                            <field name="name"/>-->
+                </sheet>
+            </form>
+        </field>
     </record>
 
     <menuitem
@@ -151,5 +181,12 @@
 </odoo>
 
 
+        <!--    <t t-name="website.components.switch">-->
+        <!--        <label class="o_switch" t-att-for="id">-->
+        <!--            <input type="checkbox" t-att-id="id" t-att-checked="checked ? 'checked' : undefined"/>-->
+        <!--            <span/>-->
+        <!--            <div t-if="label"><t t-esc="label"/></div>-->
+        <!--        </label>-->
+        <!--    </t>-->
 
 
