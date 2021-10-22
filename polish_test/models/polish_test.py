@@ -40,16 +40,33 @@ class PolishTest(models.Model):
             self.check1 = False
             self.check2 = False
 
-    @api.onchange("check2", "check1")
+    @api.onchange("check1")
     def _onchange_check1_check2(self):
-        if self.check1 == True and self.check2 != True:
+        if self.check1 and self.check2:
+            self.text = f"[{self._fields['check2'].string}] { {self._fields['check1'].string} }"
+        elif self.check1 and self.check2 != True:
             self.text = f"[{self._fields['check1'].string}]"
-        elif self.check2 == True and self.check1 != True:
+        elif self.check2  and self.check1 != True:
             self.text = {self._fields['check2'].string}
-        elif self.check2 and self.check1:
-            self.text = f"[{self._fields['check1'].string}] { {self._fields['check2'].string} }"
         else:
             self.text = " "
+
+    @api.onchange("check2")
+    def _onchange_check1_check2_(self):
+        if self.check2 and self.check1:
+            self.text = f"{ {self._fields['check1'].string} } [{self._fields['check2'].string}]"
+        elif self.check1 and self.check2 != True:
+            self.text = f"[{self._fields['check1'].string}]"
+        elif self.check2  and self.check1 != True:
+            self.text = {self._fields['check2'].string}
+        else:
+            self.text = " "
+
+
+
+
+
+
 
 
 
