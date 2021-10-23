@@ -42,6 +42,7 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <form string="Info about polish test">
+                <button name=""/>
                 <sheet>
                         <group>
                             <field name="text"/>

@@ -31,6 +31,7 @@ class PolishTest(models.Model):
     check2 = fields.Boolean(string="Test 2")
     check_all = fields.Boolean(string="Select all")
 
+
     @api.onchange("check_all")
     def _onchange_check_all(self):
         if self.check_all:
@@ -61,6 +62,8 @@ class PolishTest(models.Model):
             self.text = {self._fields['check2'].string}
         else:
             self.text = " "
+
+
 
 
 

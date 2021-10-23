@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="polish_form_view" model="ir.ui.view">
+        <field name="name">create.polish.wizard.form</field>
+        <field name="model">create.polish.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create New Polish">
+                <group>
+                    <field name="name"/>
+                    <field name="polish_test_id"/>
+                </group>
+                <footer>
+                    <button name="action_create_polish" type="object" string="Create" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_polish" model="ir.actions.act_window">
+        <field name="name">Create Polish</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">create.polish.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id"  ref="polish_form_view"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem
+            id="menu_create_polish"
+            name="Create Polish"
+            parent="polish_test_root_item"
+            action="action_create_polish"
+            sequence="20"/>
+
+</odoo>
+
+
+
+
