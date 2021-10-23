@@ -62,17 +62,6 @@
                             <field name="boolean9" attrs= "{'invisible': [('select1', '!=', '3'),('select2', '!=', '6')]}"/>
                             <field name="boolean8" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '3')]}"/>
                         </group>
-                        <group class="oe_read_only">
-                            <field name="boolean1"/>
-                            <field name="boolean2"/>
-                            <field name="boolean3"/>
-                            <field name="boolean4"/>
-                            <field name="boolean5"/>
-                            <field name="boolean6"/>
-                            <field name="boolean7"/>
-                            <field name="boolean8"/>
-                            <field name="boolean9"/>
-                        </group>
                 </sheet>
             </form>
         </field>
