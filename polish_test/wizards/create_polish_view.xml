@@ -2,8 +2,8 @@
 <odoo>
     <data>
         <record id="polish_form_update_text" model="ir.ui.view">
-            <field name="name">create.polish.wizard.form</field>
-            <field name="model">create.polish.wizard</field>
+            <field name="name">polish.update.text.wizard.form</field>
+            <field name="model">polish.update.text.wizard</field>
             <field name="arch" type="xml">
                 <form string="Create New Polish">
                     <group>
@@ -12,7 +12,7 @@
                         </group>
                     </group>
                     <footer>
-                        <button name="update_polish_text" type="object" string="Update text"/>
+                        <button name="update_polish_text_wizard" type="object" string="Update text"/>
                         <button string="Cancel" class="btn btn-secondary" special="cancel"/>
                     </footer>
                 </form>
@@ -21,7 +21,7 @@
 
     <record id="action_create_polish" model="ir.actions.act_window">
         <field name="name">Create Polish</field>
-        <field name="res_model">create.polish.wizard</field>
+        <field name="res_model">polish.update.text.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

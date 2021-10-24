@@ -65,7 +65,7 @@ class PolishTest(models.Model):
 
     def wiz_open(self):
         return {'type': 'ir.actions.act_window',
-        'res_model': "create.polish.wizard",
+        'res_model': "polish.update.text.wizard",
         'view_mode': 'form',
         'target' :'new'}
 
