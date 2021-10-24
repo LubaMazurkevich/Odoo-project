@@ -6,10 +6,10 @@ class CreatePolishWizard(models.TransientModel):
     _name = "create.polish.wizard"
     _description = "Create Polish Wizard"
 
-    name = fields.Char(string='Name', required=True)
-    polish_test_id= fields.Many2one('polish.test', string='Polish Test member', required=True)
+    text = fields.Text(string="Text")
 
-    def action_create_polish(self):
+    def update_polish_text(self):
         print("Button is clicked")
+        self.env['polish.test'].browse(self._context.get('active_ids')).update({'text': self.text})
         return True
 

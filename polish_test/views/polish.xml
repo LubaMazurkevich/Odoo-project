@@ -42,7 +42,7 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <form string="Info about polish test">
-                <button name=""/>
+                <button name="wiz_open" string="Wizard open" type="object"/>
                 <sheet>
                         <group>
                             <field name="text"/>

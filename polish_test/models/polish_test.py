@@ -63,7 +63,11 @@ class PolishTest(models.Model):
         else:
             self.text = " "
 
-
+    def wiz_open(self):
+        return {'type': 'ir.actions.act_window',
+        'res_model': "create.polish.wizard",
+        'view_mode': 'form',
+        'target' :'new'}
 
 
 
