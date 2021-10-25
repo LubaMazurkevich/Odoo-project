@@ -1,2 +1,2 @@
-from . import create_polish
+from . import polish_update_text_wizard
 

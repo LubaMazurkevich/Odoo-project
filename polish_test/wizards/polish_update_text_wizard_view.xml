@@ -19,7 +19,7 @@
             </field>
         </record>
 
-    <record id="action_create_polish" model="ir.actions.act_window">
+    <record id="action_polish_update_text" model="ir.actions.act_window">
         <field name="name">Create Polish</field>
         <field name="res_model">polish.update.text.wizard</field>
         <field name="view_mode">form</field>

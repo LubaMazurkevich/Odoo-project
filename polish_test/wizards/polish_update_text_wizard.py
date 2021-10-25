@@ -9,9 +9,8 @@ class PolishUpdateTextWizard(models.TransientModel):
     text = fields.Text(string="Text")
 
     def update_polish_text_wizard(self):
-        print("Button is clicked")
-        self.env['polish.test'].browse(self._context.get('active_ids')).update({'text': self.text})
-        return True
+        self.env["polish.test"].browse(self._context.get("active_ids")).update({"text": self.text})
+
 
 
 

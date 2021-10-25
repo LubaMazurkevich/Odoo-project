@@ -1,3 +1,3 @@
 from . import polish_test
-from . import res_new
+from . import res_partner
 

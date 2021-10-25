@@ -1,11 +1,10 @@
 from odoo import models, fields , api
-from datetime import datetime
 
 
 class PolishTest(models.Model):
 
     _name = "polish.test"
-    _description ="Polish Test"
+    _description = "Polish Test"
     text = fields.Text(string="Text")
     select1 = fields.Selection([
             ("1", "1"),
@@ -26,11 +25,9 @@ class PolishTest(models.Model):
     boolean7 = fields.Boolean(string="7")
     boolean8 = fields.Boolean(string="8")
     boolean9 = fields.Boolean(string="9")
-
     check1 = fields.Boolean(string="Test 1")
     check2 = fields.Boolean(string="Test 2")
     check_all = fields.Boolean(string="Select all")
-
 
     @api.onchange("check_all")
     def _onchange_check_all(self):
@@ -47,8 +44,8 @@ class PolishTest(models.Model):
             self.text = f"[{self._fields['check2'].string}] { {self._fields['check1'].string} }"
         elif self.check1 and self.check2 != True:
             self.text = f"[{self._fields['check1'].string}]"
-        elif self.check2  and self.check1 != True:
-            self.text = {self._fields['check2'].string}
+        elif self.check2 and self.check1 != True:
+            self.text = {self._fields["check2"].string}
         else:
             self.text = " "
 
@@ -58,16 +55,17 @@ class PolishTest(models.Model):
             self.text = f"{ {self._fields['check1'].string} } [{self._fields['check2'].string}]"
         elif self.check1 and self.check2 != True:
             self.text = f"[{self._fields['check1'].string}]"
-        elif self.check2  and self.check1 != True:
-            self.text = {self._fields['check2'].string}
+        elif self.check2 and self.check1 != True:
+            self.text = {self._fields["check2"].string}
         else:
             self.text = " "
 
-    def wiz_open(self):
-        return {'type': 'ir.actions.act_window',
-        'res_model': "polish.update.text.wizard",
-        'view_mode': 'form',
-        'target' :'new'}
+    def action_wiz_open(self):
+        return {"type": "ir.actions.act_window",
+                "res_model": "polish.update.text.wizard",
+                "view_mode": "form",
+                "target": "new"}
+
 
 
 
