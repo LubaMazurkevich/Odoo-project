@@ -13,3 +13,5 @@ class PolishUpdateTextWizard(models.TransientModel):
         self.env['polish.test'].browse(self._context.get('active_ids')).update({'text': self.text})
         return True
 
+
+
