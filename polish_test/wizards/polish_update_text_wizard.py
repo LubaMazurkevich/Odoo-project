@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class PolishUpdateTextWizard(models.TransientModel):
@@ -12,7 +13,14 @@ class PolishUpdateTextWizard(models.TransientModel):
         self.env["polish.test"].browse(self._context.get("active_ids")).update({"note": self.note})
 
     def create_contact(self):
-        self.env["res.partner"].create({"name": self.note})
+        if self.env["res.partner"].search([("name", "=", self.note)]):
+            raise UserError("This name is already exist,please change it.")
+        else:
+            self.env["res.partner"].create({"name": self.note})
+
+
+
+
 
 
 
