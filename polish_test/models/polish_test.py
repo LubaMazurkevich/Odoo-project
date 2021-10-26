@@ -29,6 +29,8 @@ class PolishTest(models.Model):
     check2 = fields.Boolean(string="Test 2")
     check_all = fields.Boolean(string="Select all")
 
+    note = fields.Char(string="Note", required=True)
+
     @api.onchange("check_all")
     def _onchange_check_all(self):
         if self.check_all:
@@ -64,7 +66,9 @@ class PolishTest(models.Model):
         return {"type": "ir.actions.act_window",
                 "res_model": "polish.update.text.wizard",
                 "view_mode": "form",
-                "target": "new"}
+                "target": "new",
+                "context": {"default_note": self.note}}
+
 
 
 

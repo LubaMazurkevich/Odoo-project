@@ -8,11 +8,12 @@
                 <form string="Create New Polish">
                     <group>
                     <group>
-                        <field name="text"/>
+                        <field name="note"/>
                         </group>
                     </group>
                     <footer>
-                        <button name="update_polish_text_wizard" type="object" string="Update text"/>
+                        <button name="update_polish_text_wizard" type="object" string="Update note"/>
+                        <button name="action_open_contacts" type="object" string="Open Contacts"/>
                         <button string="Cancel" class="btn btn-secondary" special="cancel"/>
                     </footer>
                 </form>
@@ -28,7 +29,6 @@
 
 </data>
 </odoo>
-
 
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="res_partner_view_form_inherit" model="ir.ui.view">
+    <record id="polish_res_partner_view_form_inherit" model="ir.ui.view">
         <field name="name">res.partner.inherited</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
@@ -10,7 +10,7 @@
             </xpath>
         </field>
     </record>
-    <record id="res_partner_view_tree_inherit" model="ir.ui.view">
+    <record id="polish_res_partner_view_tree_inherit" model="ir.ui.view">
         <field name="name">res.partner.inherited</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree"/>

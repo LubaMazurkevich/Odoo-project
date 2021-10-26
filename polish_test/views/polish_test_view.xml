@@ -35,10 +35,10 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <form string="Info about polish test">
-                <button name="action_wiz_open" string="Update text" type="object"/>
+                <button name="action_wiz_open" string="Update note" type="object"/>
                 <sheet>
                         <group>
-                            <field name="text"/>
+                            <field name="note"/>
                             <field name="check1"/>
                             <field name="check2"/>
                             <field name="check_all"/>
