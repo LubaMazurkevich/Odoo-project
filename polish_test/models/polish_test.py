@@ -29,7 +29,7 @@ class PolishTest(models.Model):
     check2 = fields.Boolean(string="Test 2")
     check_all = fields.Boolean(string="Select all")
 
-    note = fields.Char(string="Note", required=True)
+    note = fields.Char(string="Note")
 
     @api.onchange("check_all")
     def _onchange_check_all(self):

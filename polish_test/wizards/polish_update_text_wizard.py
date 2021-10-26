@@ -11,13 +11,8 @@ class PolishUpdateTextWizard(models.TransientModel):
     def update_polish_text_wizard(self):
         self.env["polish.test"].browse(self._context.get("active_ids")).update({"note": self.note})
 
-    def action_open_contacts(self):
-        return {"type": "ir.actions.act_window",
-                "res_model": "res.partner",
-                "view_mode": "form",
-                "target": "new",
-                "context": {"default_name": self.note}
-                }
+    def create_contact(self):
+        self.env["res.partner"].create({"name": self.note})
 
 
 
