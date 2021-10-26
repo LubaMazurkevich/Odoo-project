@@ -9,6 +9,7 @@ class PolishUpdateTextWizard(models.TransientModel):
 
     note = fields.Text(string="Note")
 
+
     def update_polish_text_wizard(self):
         self.env["polish.test"].browse(self._context.get("active_ids")).update({"note": self.note})
 
@@ -16,7 +17,8 @@ class PolishUpdateTextWizard(models.TransientModel):
         if self.env["res.partner"].search([("name", "=", self.note)]):
             raise UserError("This name is already exist,please change it.")
         else:
-            self.env["res.partner"].create({"name": self.note})
+            self.env["res.partner"].create({"name": self.note, "by_wizard": True})
+
 
 
 

@@ -31,6 +31,8 @@ class PolishTest(models.Model):
 
     note = fields.Char(string="Note")
 
+    res_id = fields.Many2one(comodel_name="res.partner", string="Partner")
+
     @api.onchange("check_all")
     def _onchange_check_all(self):
         if self.check_all:
@@ -68,6 +70,11 @@ class PolishTest(models.Model):
                 "view_mode": "form",
                 "target": "new",
                 "context": {"default_note": self.note}}
+
+
+
+
+
 
 
 
