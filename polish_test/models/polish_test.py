@@ -31,10 +31,11 @@ class PolishTest(models.Model):
 
     note = fields.Char(string="Note")
 
-    res_id = fields.Many2one(comodel_name="res.partner", string="Partner")
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Partner")
 
     @api.onchange("check_all")
     def _onchange_check_all(self):
+        print("Зашла сюда")
         if self.check_all:
             self.check1 = True
             self.check2 = True

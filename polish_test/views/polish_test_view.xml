@@ -44,7 +44,7 @@
                             <field name="check_all"/>
                             <field name="select1"/>
                             <field name="select2"/>
-                            <field name="res_id" domain="[('by_wizard', '=', True)]"/>
+                            <field name="partner_id" domain="[('is_polish', '=', True)]"/>
                         </group>
                         <group>
                             <field name="boolean1" attrs= "{'invisible': [('select2', '!=', '4'),('select1', '!=', '1')]}"/>
