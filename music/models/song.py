@@ -9,7 +9,7 @@ class Song(models.Model):
 
     name = fields.Char(string="Name")
     listeners = fields.Integer(string="Listeners")
-    duration = fields.Float(string="Duration")
+    duration = fields.Char(string="Duration")
 
     artist_id = fields.Many2many(comodel_name="artist", string="Artist")
     group_id = fields.Many2many(comodel_name="group", string="Group")
