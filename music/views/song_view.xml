@@ -16,8 +16,8 @@
                     <field name="name"/>
                     <field name="listeners"/>
                     <field name="duration"/>
-                    <field name="artist_id"/>
-                    <field name="group_id"/>
+                    <field name="artist_ids"/>
+                    <field name="group_ids"/>
                     <field name="album_id"/>
                 </group>
             </form>
