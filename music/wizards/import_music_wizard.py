@@ -67,8 +67,6 @@ class ImportMusicWizard(models.TransientModel):
             if album != None:
                 song.album_id = album.id
 
-            #TODO проверить с двойными песнями и авторами
-
         def make_albums(albums_root, group=None, artist=None, songs=None):
             for i in albums_root:
                 if i.tag == "album":
