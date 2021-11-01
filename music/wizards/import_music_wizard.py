@@ -61,9 +61,9 @@ class ImportMusicWizard(models.TransientModel):
                 if i.tag == "listeners":
                     song.listeners = i.text.strip()
             if group != None:
-                song.group_ids = [(4, group.id, 0)]
+                song.group_id = [(4, group.id, 0)]
             if artist != None:
-                song.artist_ids = [(4, artist.id, 0)]
+                song.artist_id = [(4, artist.id, 0)]
             if album != None:
                 song.album_id = album.id
 

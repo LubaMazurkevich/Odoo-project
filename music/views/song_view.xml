@@ -4,7 +4,7 @@
         <field name="name">Songs</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">song</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="song_form_view" model="ir.ui.view">
@@ -16,12 +16,52 @@
                     <field name="name"/>
                     <field name="listeners"/>
                     <field name="duration"/>
-                    <field name="artist_ids"/>
-                    <field name="group_ids"/>
                     <field name="album_id"/>
+                    <field name="artist_id"/>
                 </group>
             </form>
         </field>
     </record>
+
+    <record id="song_tree_view" model="ir.ui.view">
+        <field name="name">song.tree</field>
+        <field name="model">song</field>
+        <field name="arch" type="xml">
+            <tree string="Info about songs">
+                <field name="name"/>
+                <field name="listeners"/>
+                <field name="duration"/>
+                <field name="album_id"/>
+                <field name="artist_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="song_kanban_view" model="ir.ui.view">
+        <field name="name">song.kanban</field>
+        <field name="model">song</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>Name:<strong><span><field name="name"/></span></strong>
+                                    </li>
+                                    <li>Listeners:<field name="listeners"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
 
 </odoo>

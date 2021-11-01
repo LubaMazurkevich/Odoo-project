@@ -11,6 +11,6 @@ class Song(models.Model):
     listeners = fields.Integer(string="Listeners")
     duration = fields.Char(string="Duration")
 
-    artist_ids = fields.Many2many(comodel_name="artist", string="Artist")
-    group_ids = fields.Many2many(comodel_name="group", string="Group")
+    artist_id = fields.Many2many(comodel_name="artist", string="Artist")
+    group_id = fields.Many2many(comodel_name="group", string="Group")
     album_id = fields.Many2one(comodel_name="album", string="Album")
