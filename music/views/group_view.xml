@@ -4,7 +4,7 @@
         <field name="name"> Groups</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">group</field>
-        <field name="view_mode">form,tree</field>
+        <field name="view_mode">kanban,form,tree</field>
     </record>
 
     <record id="group_form_view" model="ir.ui.view">
@@ -24,6 +24,42 @@
         </field>
     </record>
 
+    <record id="group_kanban_view" model="ir.ui.view">
+        <field name="name">group.kanban</field>
+        <field name="model">group</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>Name:<strong><span><field name="name"/></span></strong>
+                                    </li>
+                                    <li>Month listeners:<field name="month_listeners"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="group_tree_view" model="ir.ui.view">
+        <field name="name">group.tree</field>
+        <field name="model">group</field>
+        <field name="arch" type="xml">
+            <tree string="Info about groups">
+                <field name="name"/>
+                <field name="month_listeners"/>
+                <field name="artist_id"/>
+                <field name="song_id"/>
+            </tree>
+        </field>
+    </record>
+
     <menuitem
         id="song_root_item"
         name="Music"
@@ -35,6 +71,20 @@
         parent="song_root_item"
         name="Groups"
         action="group_action"
+        sequence="10"/>
+
+    <menuitem
+        id="artist_root_item"
+        parent="song_root_item"
+        name="Artists"
+        action="artist_action"
+        sequence="10"/>
+
+    <menuitem
+        id="album_root_item"
+        parent="song_root_item"
+        name="Albums"
+        action="album_action"
         sequence="10"/>
 
     <menuitem

@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_song" model="ir.actions.act_window">
-        <field name="name">Songs</field>
+    <record id="album_action" model="ir.actions.act_window">
+        <field name="name">Albums</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">song</field>
+        <field name="res_model">album</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
-    <record id="song_form_view" model="ir.ui.view">
-        <field name="name">song.form</field>
-        <field name="model">song</field>
+    <record id="album_form_view" model="ir.ui.view">
+        <field name="name">album.form</field>
+        <field name="model">album</field>
         <field name="arch" type="xml">
-            <form string="Songs">
+            <form string="Artists">
                 <group>
                     <field name="name"/>
-                    <field name="listeners"/>
-                    <field name="duration"/>
-                    <field name="album_id"/>
+                    <field name="release_date"/>
                     <field name="artist_id"/>
-<!--                    <field name="group_id"/>-->
+                    <field name="group_id"/>
+                    <field name="song_id"/>
                 </group>
             </form>
         </field>
     </record>
 
-    <record id="song_tree_view" model="ir.ui.view">
-        <field name="name">song.tree</field>
-        <field name="model">song</field>
+    <record id="album_tree_view" model="ir.ui.view">
+        <field name="name">album.tree</field>
+        <field name="model">album</field>
         <field name="arch" type="xml">
-            <tree string="Info about songs">
+            <tree string="Info about albums">
                 <field name="name"/>
-                <field name="listeners"/>
-                <field name="duration"/>
-                <field name="album_id"/>
-                <field name="artist_id"/>
-<!--                <field name="group_id"/>-->
+                <field name="release_date"/>
+                 <field name="artist_id"/>
+                 <field name="group_id"/>
+                 <field name="song_id"/>
             </tree>
         </field>
     </record>
 
-    <record id="song_kanban_view" model="ir.ui.view">
-        <field name="name">song.kanban</field>
-        <field name="model">song</field>
+    <record id="album_kanban_view" model="ir.ui.view">
+        <field name="name">album.kanban</field>
+        <field name="model">album</field>
         <field name="arch" type="xml">
             <kanban>
                 <templates>
@@ -51,7 +49,7 @@
                                 <ul>
                                     <li>Name:<strong><span><field name="name"/></span></strong>
                                     </li>
-                                    <li>Listeners:<field name="listeners"/>
+                                    <li>Release date:<field name="release_date"/>
                                     </li>
                                 </ul>
                             </div>
