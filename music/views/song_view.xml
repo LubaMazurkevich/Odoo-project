@@ -18,7 +18,7 @@
                     <field name="duration"/>
                     <field name="album_id"/>
                     <field name="artist_id"/>
-<!--                    <field name="group_id"/>-->
+                    <field name="song_group_id"/>
                 </group>
             </form>
         </field>
@@ -34,7 +34,7 @@
                 <field name="duration"/>
                 <field name="album_id"/>
                 <field name="artist_id"/>
-<!--                <field name="group_id"/>-->
+                <field name="song_group_id"/>
             </tree>
         </field>
     </record>

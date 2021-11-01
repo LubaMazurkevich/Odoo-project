@@ -39,7 +39,7 @@ class ImportMusicWizard(models.TransientModel):
                 if i.tag == "albums":
                     make_albums(i, artist=artist)
             if group is not None:
-                artist.group_id = group.id
+                artist.artist_group_id = group.id   #change here
 
         def make_singles(single_root, group=None, artist=None):
             for i in single_root:
@@ -61,7 +61,7 @@ class ImportMusicWizard(models.TransientModel):
                 if i.tag == "listeners":
                     song.listeners = i.text.strip()
             if group != None:
-                song.group_id = [(4, group.id, 0)]
+                song.song_group_id = [(4, group.id, 0)]  #change here
             if artist != None:
                 song.artist_id = [(4, artist.id, 0)]
             if album != None:
@@ -83,14 +83,14 @@ class ImportMusicWizard(models.TransientModel):
                     new_release_date=i.text.strip()
                     album.release_date = new_release_date[6:] + "-" + new_release_date[0:5]
             if group is not None:
-                album.group_id = group.id
+                album.album_group_id = group.id  #change here
             if artist is not None:
                 album.artist_id = artist.id
             if songs is not None:
                 album.song_id = songs.id
 
         def make_group(group_root):
-            group = self.env["group"].create({})
+            group = self.env["api.group"].create({})
             for i in group_root:
                 if i.tag == "month_listeners":
                     group.month_listeners = i.text.strip()

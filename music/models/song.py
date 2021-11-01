@@ -12,5 +12,5 @@ class Song(models.Model):
     duration = fields.Char(string="Duration")
 
     artist_id = fields.Many2many(comodel_name="artist", string="Artist")
-    group_id = fields.Many2many(comodel_name="group", string="Group")
+    song_group_id = fields.Many2many(comodel_name="api.group", string="Group") #change here
     album_id = fields.Many2one(comodel_name="album", string="Album")

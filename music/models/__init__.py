@@ -1,5 +1,5 @@
 from . import album
 from . import artist
-from . import group
+from . import api_group
 from . import song
 
