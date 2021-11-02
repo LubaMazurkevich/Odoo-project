@@ -14,7 +14,7 @@ class Artist(models.Model):
         ("female", "Female"),
         ("other", "other"),
     ])
-    country_id = fields.Char(string="Country")
+    country_id = fields.Many2one("res.country", string="Country")
     month_listeners = fields.Integer(string="Month listeners")
 
     album_id = fields.One2many(comodel_name="album", inverse_name="artist_id", string="Album")

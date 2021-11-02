@@ -2,6 +2,8 @@ import base64
 
 from odoo import models, fields
 import xml.etree.ElementTree as ET
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class ImportMusicWizard(models.TransientModel):
@@ -23,6 +25,7 @@ class ImportMusicWizard(models.TransientModel):
 
         def make_artist(artist_root, group):
             artist = self.env["artist"].create({})
+
             for i in artist_root:
                 if i.tag == 'name':
                     artist.name = i.text.strip()
@@ -33,13 +36,17 @@ class ImportMusicWizard(models.TransientModel):
                 if i.tag == "sex":
                     artist.sex = i.text.strip()
                 if i.tag == "country":
-                    artist.country_id = i.text.strip()
+                    id = self.env["res.country"].search(['|', ("name", "=", i.text.strip()), ("code", "=", i.text.strip())])
+                    if id:
+                        artist.country_id = id
+                    else:
+                        _logger.warning(f"Parsing error for music file.Country for artist {artist.name} was not found.")
                 if i.tag == "singles":
                     make_singles(i, artist=artist)
                 if i.tag == "albums":
                     make_albums(i, artist=artist)
             if group is not None:
-                artist.artist_group_id = group.id   #change here
+                artist.artist_group_id = group.id
 
         def make_singles(single_root, group=None, artist=None):
             for i in single_root:
@@ -61,7 +68,7 @@ class ImportMusicWizard(models.TransientModel):
                 if i.tag == "listeners":
                     song.listeners = i.text.strip()
             if group != None:
-                song.song_group_id = [(4, group.id, 0)]  #change here
+                song.song_group_id = [(4, group.id, 0)]
             if artist != None:
                 song.artist_id = [(4, artist.id, 0)]
             if album != None:
@@ -83,7 +90,7 @@ class ImportMusicWizard(models.TransientModel):
                     new_release_date=i.text.strip()
                     album.release_date = new_release_date[6:] + "-" + new_release_date[0:5]
             if group is not None:
-                album.album_group_id = group.id  #change here
+                album.album_group_id = group.id
             if artist is not None:
                 album.artist_id = artist.id
             if songs is not None:
