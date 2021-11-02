@@ -4,6 +4,7 @@ from odoo import models, fields
 import xml.etree.ElementTree as ET
 import logging
 _logger = logging.getLogger(__name__)
+from datetime import datetime
 
 
 class ImportMusicWizard(models.TransientModel):
@@ -110,8 +111,8 @@ class ImportMusicWizard(models.TransientModel):
             if i.tag == "songs":
                 self.make_songs(i, album=album)
             if i.tag == "release_date":
-                new_release_date=i.text.strip()
-                album.release_date = new_release_date[6:] + "-" + new_release_date[0:5]
+                date_str = i.text.strip()
+                album.release_date = datetime.strptime(date_str, '%m-%d-%Y')
         if group is not None:
             album.album_group_id = group.id
         if artist is not None:
