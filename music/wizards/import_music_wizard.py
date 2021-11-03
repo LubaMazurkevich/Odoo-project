@@ -1,11 +1,9 @@
 import base64
-
+from datetime import datetime
 from odoo import models, fields
 import xml.etree.ElementTree as ET
 import logging
 _logger = logging.getLogger(__name__)
-from datetime import datetime
-import lxml.etree
 
 
 class ImportMusicWizard(models.TransientModel):
@@ -19,16 +17,13 @@ class ImportMusicWizard(models.TransientModel):
         file = base64.b64decode(self.file)
         file_string = file.decode('utf-8')
         root = ET.fromstring(file_string)
-        try:
-            artists_root = root.find("Artists")
+
+        artists_root = root.find("Artists")
+        if artists_root:
             self.parse_artists(artists_root)
-        except:
-            pass
-        try:
-            groups_root = root.find("Groups")
+        groups_root = root.find("Groups")
+        if groups_root:
             self.parse_groups(groups_root)
-        except:
-            pass
 
     def parse_artists(self, artists_root, group=None):
         for artist in artists_root.iterfind(".//artist"):
@@ -40,45 +35,42 @@ class ImportMusicWizard(models.TransientModel):
 
     def make_artist(self, artist_root, group):
         artist = self.env["artist"].create({})
-        try:
-            atrist_name = artist_root.find("name")
-            artist.name = atrist_name.text.strip()
-        except:
-            _logger.warning(f"Parsing error for music file:name for artist {artist.name}")
-        try:
-            artist_month_listeners = artist_root.find("month_listeners")
+        artist_name = artist_root.find("name")
+        if artist_name is not None:
+            artist.name = artist_name.text.strip()
+        else:
+            _logger.warning(f"Parsing error for music file: name for artist")
+        artist_month_listeners = artist_root.find("month_listeners")
+        if artist_month_listeners is not None:
             artist.month_listeners = artist_month_listeners .text.strip()
-        except:
+        else:
             _logger.warning(f"Parsing error for music file:month listeners for artist {artist.name}")
-        try:
-            artist_age = artist_root.find("age")
+
+        artist_age = artist_root.find("age")
+        if artist_age is not None:
             artist.age = artist_age.text.strip()
-        except:
+        else:
             _logger.warning(f"Parsing error for music file:age for artist {artist.name}")
-        try:
-            artist_sex = artist_root.find("sex")
+        artist_sex = artist_root.find("sex")
+        if artist_sex is not None:
             artist.sex = artist_sex.text.strip()
-        except:
+        else:
             _logger.warning(f"Parsing error for music file:sex for artist {artist.name}")
-        try:
-            artist_country = artist_root.find("country")
-            id = self.env["res.country"].search(['|', ("name", "=", artist_country.text.strip()), ("code", "=", artist_country.text.strip())])
-            if id:
-                artist.country_id = id
+
+        artist_country = artist_root.find("country")
+        if artist_country is not None:
+            res_country_id = self.env["res.country"].search(['|', ("name", "=", artist_country.text.strip()), ("code", "=", artist_country.text.strip())])
+            if res_country_id:
+                artist.country_id = res_country_id
             else:
                 _logger.warning(f"Parsing error for music file.Country for artist {artist.name} was not found.")
-        except:
-            pass
-        try:
-            artist_singles = artist_root.find("singles")
+
+        artist_singles = artist_root.find("singles")
+        if artist_singles is not None:
             self.make_singles(artist_singles, artist=artist)
-        except:
-            pass
-        try:
-            artist_albums = artist_root.find("albums")
+        artist_albums = artist_root.find("albums")
+        if artist_albums is not None:
             self.make_albums(artist_albums, artist=artist)
-        except:
-            pass
         if group:
             artist.artist_group_id = group.id
 
@@ -95,85 +87,76 @@ class ImportMusicWizard(models.TransientModel):
             self.make_album(album, group, artist, songs)
 
     def make_group(self, group_root):
-        group = self.env["api.group"].create({})
-        try:
-            group_month_listeners = group_root.find("month_listeners")
-            group.month_listeners = group_month_listeners.text.strip()
-        except:
+        group_dct = {}
+        group_month_listeners = group_root.find("month_listeners")
+        if group_month_listeners is not None:
+            group_dct["month_listeners"] = group_month_listeners.text.strip()
+        else:
             _logger.warning(f"Parsing error for music file :group month listeners")
-        try:
-            group_name = group_root.find("name")
-            group.name = group_name.text.strip()
-        except:
+        group_name = group_root.find("name")
+        if group_name is not None:
+            group_dct["name"] = group_name.text.strip()
+        else:
             _logger.warning(f"Parsing error for music file:group name")
-        try:
-            group_artists = group_root.find("artists")
-            self.parse_artists(group_artists, group=group)
-        except:
-            pass
-        try:
-            group_albums = group_root.find("albums")
-            self.make_albums(group_albums, group=group)
-        except:
-            pass
-        try:
-            group_singles = group_root.find("singles")
-            self.make_singles(group_singles, group=group)
-        except:
-            pass
+
+        group_artists = group_root.find("artists")
+        group_albums = group_root.find("albums")
+        group_singles = group_root.find("singles")
+
+        if group_dct or group_artists is not None or group_albums is not None or group_singles is not None:
+            group = self.env["api.group"].create(group_dct)
+            if group_artists is not None:
+                self.parse_artists(group_artists, group=group)
+            if group_albums is not None:
+                self.make_albums(group_albums, group=group)
+            if group_singles is not None:
+                self.make_singles(group_singles, group=group)
 
     def make_song(self, song_root, group=None, artist=None, album=None):
-        song = self.env["song"].create({})
-        try:
-            song_name = song_root.find("name")
-            song.name = song_name.text.strip()
-        except:
+        song_dct = {}
+        song_name = song_root.find("name")
+        if song_name is not None:
+            song_dct["name"] = song_name.text.strip()
+        else:
             _logger.warning(f"Parsing error for music file:song name")
-        try:
-            song_duration = song_root.find("duration")
-            song.duration = song_duration.text.strip()
-        except:
+        song_duration = song_root.find("duration")
+        if song_duration is not None:
+            song_dct["duration"] = song_duration.text.strip()
+        else:
             _logger.warning(f"Parsing error for music file:song duration")
-        try:
-            song_listeners = song_root.find("listeners")
-            song.listeners = song_listeners.text.strip()
-        except:
+        song_listeners = song_root.find("listeners")
+        if song_listeners is not None:
+            song_dct["listeners"] = song_listeners.text.strip()
+        else:
             _logger.warning(f"Parsing error for music file:song listeners")
-        if group:
-            song.song_group_id = [(4, group.id, 0)]
-        if artist:
-            song.artist_id = [(4, artist.id, 0)]
-        if album:
-            song.album_id = album.id
+        if song_dct:
+            song = self.env["song"].create(song_dct)
+            if group:
+                song.song_group_id = [(4, group.id, 0)]
+            if artist:
+                song.artist_id = [(4, artist.id, 0)]
+            if album:
+                song.album_id = album.id
 
     def make_album(self, album_root, group, artist, songs):
-        album = self.env["album"].create({})
-        try:
-            album_songs = album_root.find("songs")
-            self.make_songs(album_songs, album=album)
-        except:
-            pass
-        try:
-            album_name = album_root.find("name")
-            album.name = album_name.text.strip()
-        except:
-            _logger.warning(f"Parsing error for music file:album name")
-        try:
-            album_release_date = album_root.find("release_date")
+        album_dct = {}
+        album_name = album_root.find("name")
+        if album_name is not None:
+            album_dct["name"] = album_name.text.strip()
+        album_release_date = album_root.find("release_date")
+        if album_release_date is not None:
             date_str = album_release_date.text.strip()
-            album.release_date = datetime.strptime(date_str, '%m-%d-%Y')
-        except:
+            album_dct["release_date"] = datetime.strptime(date_str, '%m-%d-%Y')
+        else:
             _logger.warning(f"Parsing error for music file:album release date")
-        if group:
-            album.album_group_id = group.id
-        if artist:
-            album.artist_id = artist.id
-        if songs:
-            album.song_id = [(4, songs.id, 0)]
-
-
-
-
-
-
-
+        album_songs = album_root.find("songs")
+        if album_dct or album_songs is not None:
+            album = self.env["album"].create(album_dct)
+            if album_songs is not None:
+                self.make_songs(album_songs, album=album)
+            if group:
+                album.album_group_id = group.id
+            if artist:
+                album.artist_id = artist.id
+            if songs:
+                album.song_id = [(4, songs.id, 0)]
