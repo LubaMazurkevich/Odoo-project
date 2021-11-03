@@ -34,45 +34,48 @@ class ImportMusicWizard(models.TransientModel):
             self.make_group(group)
 
     def make_artist(self, artist_root, group):
-        artist = self.env["artist"].create({})
+        artist_dct = {}
         artist_name = artist_root.find("name")
         if artist_name is not None:
-            artist.name = artist_name.text.strip()
+            artist_dct["name"] = artist_name.text.strip()
         else:
             _logger.warning(f"Parsing error for music file: name for artist")
+
         artist_month_listeners = artist_root.find("month_listeners")
         if artist_month_listeners is not None:
-            artist.month_listeners = artist_month_listeners .text.strip()
+            artist_dct["month_listeners"] = artist_month_listeners .text.strip()
         else:
-            _logger.warning(f"Parsing error for music file:month listeners for artist {artist.name}")
-
+            _logger.warning(f"Parsing error for music file:month listeners for artist")
         artist_age = artist_root.find("age")
         if artist_age is not None:
-            artist.age = artist_age.text.strip()
+            artist_dct["age"] = artist_age.text.strip()
         else:
-            _logger.warning(f"Parsing error for music file:age for artist {artist.name}")
+            _logger.warning(f"Parsing error for music file:age for artist")
         artist_sex = artist_root.find("sex")
         if artist_sex is not None:
-            artist.sex = artist_sex.text.strip()
+            artist_dct["sex"] = artist_sex.text.strip()
         else:
-            _logger.warning(f"Parsing error for music file:sex for artist {artist.name}")
+            _logger.warning(f"Parsing error for music file:sex for artist")
 
         artist_country = artist_root.find("country")
         if artist_country is not None:
             res_country_id = self.env["res.country"].search(['|', ("name", "=", artist_country.text.strip()), ("code", "=", artist_country.text.strip())])
             if res_country_id:
-                artist.country_id = res_country_id
+                artist_dct["country_id"] = res_country_id.id
             else:
-                _logger.warning(f"Parsing error for music file.Country for artist {artist.name} was not found.")
+                _logger.warning(f"Parsing error for music file:country for artist")
 
         artist_singles = artist_root.find("singles")
-        if artist_singles is not None:
-            self.make_singles(artist_singles, artist=artist)
         artist_albums = artist_root.find("albums")
-        if artist_albums is not None:
-            self.make_albums(artist_albums, artist=artist)
-        if group:
-            artist.artist_group_id = group.id
+
+        if artist_dct or artist_singles is not None or artist_albums is not None or group is not None:
+            artist = self.env["artist"].create(artist_dct)
+            if group is not None:
+                artist.artist_group_id = group.id
+            if artist_singles is not None:
+                self.make_singles(artist_singles, artist=artist)
+            if artist_albums is not None:
+                self.make_albums(artist_albums, artist=artist)
 
     def make_singles(self, single_root, group=None, artist=None):
         for single in single_root.iterfind(".//songs"):
