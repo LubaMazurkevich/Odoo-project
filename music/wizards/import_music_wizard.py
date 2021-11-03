@@ -68,13 +68,13 @@ class ImportMusicWizard(models.TransientModel):
         artist_singles = artist_root.find("singles")
         artist_albums = artist_root.find("albums")
 
-        if artist_dct or artist_singles is not None or artist_albums is not None or group is not None:
+        if artist_dct or artist_singles or artist_albums or group:
             artist = self.env["artist"].create(artist_dct)
-            if group is not None:
+            if group:
                 artist.artist_group_id = group.id
-            if artist_singles is not None:
+            if artist_singles:
                 self.make_singles(artist_singles, artist=artist)
-            if artist_albums is not None:
+            if artist_albums:
                 self.make_albums(artist_albums, artist=artist)
 
     def make_singles(self, single_root, group=None, artist=None):
@@ -106,13 +106,13 @@ class ImportMusicWizard(models.TransientModel):
         group_albums = group_root.find("albums")
         group_singles = group_root.find("singles")
 
-        if group_dct or group_artists is not None or group_albums is not None or group_singles is not None:
+        if group_dct or group_artists or group_albums or group_singles:
             group = self.env["api.group"].create(group_dct)
-            if group_artists is not None:
+            if group_artists:
                 self.parse_artists(group_artists, group=group)
-            if group_albums is not None:
+            if group_albums:
                 self.make_albums(group_albums, group=group)
-            if group_singles is not None:
+            if group_singles:
                 self.make_singles(group_singles, group=group)
 
     def make_song(self, song_root, group=None, artist=None, album=None):
@@ -153,9 +153,9 @@ class ImportMusicWizard(models.TransientModel):
         else:
             _logger.warning(f"Parsing error for music file:album release date")
         album_songs = album_root.find("songs")
-        if album_dct or album_songs is not None:
+        if album_dct or album_songs:
             album = self.env["album"].create(album_dct)
-            if album_songs is not None:
+            if album_songs:
                 self.make_songs(album_songs, album=album)
             if group:
                 album.album_group_id = group.id
