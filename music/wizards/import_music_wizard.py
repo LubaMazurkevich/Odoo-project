@@ -31,12 +31,12 @@ class ImportMusicWizard(models.TransientModel):
             pass
 
     def parse_artists(self, artists_root, group=None):
-        for i in artists_root.findall(".//artist"):
-            self.make_artist(i, group)
+        for artist in artists_root.iterfind(".//artist"):
+            self.make_artist(artist, group)
 
     def parse_groups(self, groups_root):
-        for i in groups_root.findall(".//group"):
-            self.make_group(i)
+        for group in groups_root.iterfind(".//group"):
+            self.make_group(group)
 
     def make_artist(self, artist_root, group):
         artist = self.env["artist"].create({})
@@ -49,7 +49,7 @@ class ImportMusicWizard(models.TransientModel):
             artist_month_listeners = artist_root.find("month_listeners")
             artist.month_listeners = artist_month_listeners .text.strip()
         except:
-            _logger.warning(f"Parsing error for music file:month_listeners for artist {artist.name}")
+            _logger.warning(f"Parsing error for music file:month listeners for artist {artist.name}")
         try:
             artist_age = artist_root.find("age")
             artist.age = artist_age.text.strip()
@@ -82,17 +82,17 @@ class ImportMusicWizard(models.TransientModel):
         if group:
             artist.artist_group_id = group.id
 
-    def make_singles(self,single_root, group=None, artist=None):
-        for i in single_root.findall(".//songs"):
-            self.make_songs(i, group, artist)
+    def make_singles(self, single_root, group=None, artist=None):
+        for single in single_root.iterfind(".//songs"):
+            self.make_songs(single, group, artist)
 
-    def make_songs(self,songs_root, group=None, artist=None, album=None):
-        for i in songs_root.findall(".//song"):
-            self.make_song(i, group, artist, album)
+    def make_songs(self, songs_root, group=None, artist=None, album=None):
+        for songs in songs_root.iterfind(".//song"):
+            self.make_song(songs, group, artist, album)
 
     def make_albums(self, albums_root, group=None, artist=None, songs=None):
-        for i in albums_root.findall(".//album"):
-            self.make_album(i, group, artist, songs)
+        for album in albums_root.iterfind(".//album"):
+            self.make_album(album, group, artist, songs)
 
     def make_group(self, group_root):
         group = self.env["api.group"].create({})
@@ -100,27 +100,27 @@ class ImportMusicWizard(models.TransientModel):
             group_month_listeners = group_root.find("month_listeners")
             group.month_listeners = group_month_listeners.text.strip()
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file :group month listeners")
         try:
             group_name = group_root.find("name")
             group.name = group_name.text.strip()
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file:group name")
         try:
             group_artists = group_root.find("artists")
             self.parse_artists(group_artists, group=group)
         except:
-            _logger.warning(f"Parsing error for music file.")
+            pass
         try:
             group_albums = group_root.find("albums")
             self.make_albums(group_albums, group=group)
         except:
-            _logger.warning(f"Parsing error for music file.")
+            pass
         try:
             group_singles = group_root.find("singles")
             self.make_singles(group_singles, group=group)
         except:
-            _logger.warning(f"Parsing error for music file.")
+            pass
 
     def make_song(self, song_root, group=None, artist=None, album=None):
         song = self.env["song"].create({})
@@ -128,17 +128,17 @@ class ImportMusicWizard(models.TransientModel):
             song_name = song_root.find("name")
             song.name = song_name.text.strip()
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file:song name")
         try:
             song_duration = song_root.find("duration")
             song.duration = song_duration.text.strip()
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file:song duration")
         try:
             song_listeners = song_root.find("listeners")
             song.listeners = song_listeners.text.strip()
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file:song listeners")
         if group:
             song.song_group_id = [(4, group.id, 0)]
         if artist:
@@ -152,18 +152,18 @@ class ImportMusicWizard(models.TransientModel):
             album_songs = album_root.find("songs")
             self.make_songs(album_songs, album=album)
         except:
-            _logger.warning(f"Parsing error for music file.")
+            pass
         try:
             album_name = album_root.find("name")
             album.name = album_name.text.strip()
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file:album name")
         try:
             album_release_date = album_root.find("release_date")
             date_str = album_release_date.text.strip()
             album.release_date = datetime.strptime(date_str, '%m-%d-%Y')
         except:
-            _logger.warning(f"Parsing error for music file.")
+            _logger.warning(f"Parsing error for music file:album release date")
         if group:
             album.album_group_id = group.id
         if artist:
