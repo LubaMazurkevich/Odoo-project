@@ -8,7 +8,7 @@ class ApiSong(models.Model):
 
     name = fields.Char(string="Name")
     listeners = fields.Integer(string="Listeners")
-    duration = fields.Char(string="Duration")
+    duration = fields.Char(string="Duration") #make Float
 
     artist_ids = fields.Many2many(comodel_name="api.artist", string="Artist")
     song_group_ids = fields.Many2many(comodel_name="api.group", string="Group")

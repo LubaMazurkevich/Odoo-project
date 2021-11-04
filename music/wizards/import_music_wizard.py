@@ -124,7 +124,7 @@ class ImportMusicWizard(models.TransientModel):
             _logger.warning(f"Parsing error for music file:song name")
         song_duration = song_root.find("duration")
         if song_duration is not None:
-            song_dct["duration"] = song_duration.text.strip()
+            song_dct["duration"] = float(song_duration.text.strip().replace(":", "."))
         else:
             _logger.warning(f"Parsing error for music file:song duration")
         song_listeners = song_root.find("listeners")

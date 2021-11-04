@@ -15,7 +15,7 @@
                 <group>
                     <field name="name"/>
                     <field name="listeners"/>
-                    <field name="duration"/>
+                    <field name="duration" widget="float_time"/>
                     <field name="album_id"/>
                     <field name="artist_ids"/>
                     <field name="song_group_ids"/>
@@ -31,7 +31,7 @@
             <tree string="Info about songs">
                 <field name="name"/>
                 <field name="listeners"/>
-                <field name="duration"/>
+                <field name="duration" widget="float_time"/>
                 <field name="album_id"/>
                 <field name="artist_ids"/>
                 <field name="song_group_ids"/>
