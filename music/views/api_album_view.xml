@@ -3,13 +3,13 @@
     <record id="album_action" model="ir.actions.act_window">
         <field name="name">Albums</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">album</field>
+        <field name="res_model">api.album</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="album_form_view" model="ir.ui.view">
-        <field name="name">album.form</field>
-        <field name="model">album</field>
+        <field name="name">api.album.form</field>
+        <field name="model">api.album</field>
         <field name="arch" type="xml">
             <form string="Artists">
                 <group>
@@ -24,8 +24,8 @@
     </record>
 
     <record id="album_tree_view" model="ir.ui.view">
-        <field name="name">album.tree</field>
-        <field name="model">album</field>
+        <field name="name">api.album.tree</field>
+        <field name="model">api.album</field>
         <field name="arch" type="xml">
             <tree string="Info about albums">
                 <field name="name"/>
@@ -38,8 +38,8 @@
     </record>
 
     <record id="album_kanban_view" model="ir.ui.view">
-        <field name="name">album.kanban</field>
-        <field name="model">album</field>
+        <field name="name">api.album.kanban</field>
+        <field name="model">api.album</field>
         <field name="arch" type="xml">
             <kanban>
                 <templates>

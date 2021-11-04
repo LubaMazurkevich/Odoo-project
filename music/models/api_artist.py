@@ -2,9 +2,9 @@
 from odoo import models, fields
 
 
-class Artist(models.Model):
+class ApiArtist(models.Model):
 
-    _name = "artist"
+    _name = "api.artist"
     _description = "Artist"
 
     name = fields.Char(string="Name")
@@ -17,7 +17,7 @@ class Artist(models.Model):
     country_id = fields.Many2one("res.country", string="Country")
     month_listeners = fields.Integer(string="Month listeners")
 
-    album_id = fields.One2many(comodel_name="album", inverse_name="artist_id", string="Album")
+    album_id = fields.One2many(comodel_name="api.album", inverse_name="artist_id", string="Album")
     song_id = fields.Many2many(comodel_name="song", string="Song")
     artist_group_id = fields.Many2one(comodel_name="api.group", string="Group")
 

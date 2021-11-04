@@ -3,13 +3,13 @@
     <record id="artist_action" model="ir.actions.act_window">
         <field name="name">Artists</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">artist</field>
+        <field name="res_model">api.artist</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="artist_form_view" model="ir.ui.view">
-        <field name="name">artist.form</field>
-        <field name="model">artist</field>
+        <field name="name">api.artist.form</field>
+        <field name="model">api.artist</field>
         <field name="arch" type="xml">
             <form string="Artists">
                 <group>
@@ -27,8 +27,8 @@
     </record>
 
     <record id="artist_tree_view" model="ir.ui.view">
-        <field name="name">artist.tree</field>
-        <field name="model">artist</field>
+        <field name="name">api.artist.tree</field>
+        <field name="model">api.artist</field>
         <field name="arch" type="xml">
             <tree string="Info about artists">
                 <field name="name"/>
@@ -45,8 +45,8 @@
     </record>
 
     <record id="artist_kanban_view" model="ir.ui.view">
-        <field name="name">artist.kanban</field>
-        <field name="model">artist</field>
+        <field name="name">api.artist.kanban</field>
+        <field name="model">api.artist</field>
         <field name="arch" type="xml">
             <kanban>
                 <templates>
@@ -66,5 +66,4 @@
             </kanban>
         </field>
     </record>
-
 </odoo>

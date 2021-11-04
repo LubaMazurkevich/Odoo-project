@@ -69,7 +69,7 @@ class ImportMusicWizard(models.TransientModel):
         artist_albums = artist_root.find("albums")
 
         if artist_dct or artist_singles or artist_albums or group:
-            artist = self.env["artist"].create(artist_dct)
+            artist = self.env["api.artist"].create(artist_dct)
             if group:
                 artist.artist_group_id = group.id
             if artist_singles:
@@ -154,7 +154,7 @@ class ImportMusicWizard(models.TransientModel):
             _logger.warning(f"Parsing error for music file:album release date")
         album_songs = album_root.find("songs")
         if album_dct or album_songs:
-            album = self.env["album"].create(album_dct)
+            album = self.env["api.album"].create(album_dct)
             if album_songs:
                 self.make_songs(album_songs, album=album)
             if group:
