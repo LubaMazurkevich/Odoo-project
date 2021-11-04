@@ -18,8 +18,8 @@
                     <field name="sex"/>
                     <field name="country_id"/>
                     <field name="month_listeners"/>
-                    <field name="album_id"/>
-                    <field name="song_id"/>
+                    <field name="album_ids"/>
+                    <field name="song_ids"/>
                     <field name="artist_group_id"/>
                 </group>
             </form>
@@ -37,8 +37,8 @@
                 <field name="country_id"/>
                 <field name="month_listeners"/>
 
-                <field name="album_id"/>
-                <field name="song_id"/>
+                <field name="album_ids"/>
+                <field name="song_ids"/>
                 <field name="artist_group_id"/>
             </tree>
         </field>

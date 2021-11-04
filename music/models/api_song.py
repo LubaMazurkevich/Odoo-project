@@ -10,6 +10,6 @@ class ApiSong(models.Model):
     listeners = fields.Integer(string="Listeners")
     duration = fields.Char(string="Duration")
 
-    artist_id = fields.Many2many(comodel_name="api.artist", string="Artist")
-    song_group_id = fields.Many2many(comodel_name="api.group", string="Group")
+    artist_ids = fields.Many2many(comodel_name="api.artist", string="Artist")
+    song_group_ids = fields.Many2many(comodel_name="api.group", string="Group")
     album_id = fields.Many2one(comodel_name="api.album", string="Album")

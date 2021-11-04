@@ -16,8 +16,8 @@
                         <group>
                             <field name="name"/>
                             <field name="month_listeners"/>
-                            <field name="artist_id"/>
-                            <field name="song_id"/>
+                            <field name="artist_ids"/>
+                            <field name="song_ids"/>
                         </group>
                 </sheet>
             </form>
@@ -54,8 +54,8 @@
             <tree string="Info about groups">
                 <field name="name"/>
                 <field name="month_listeners"/>
-                <field name="artist_id"/>
-                <field name="song_id"/>
+                <field name="artist_ids"/>
+                <field name="song_ids"/>
             </tree>
         </field>
     </record>

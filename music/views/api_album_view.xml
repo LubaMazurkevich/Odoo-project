@@ -17,7 +17,7 @@
                     <field name="release_date"/>
                     <field name="artist_id"/>
                     <field name="album_group_id"/>
-                    <field name="song_id"/>
+                    <field name="song_ids"/>
                 </group>
             </form>
         </field>
@@ -32,7 +32,7 @@
                 <field name="release_date"/>
                  <field name="artist_id"/>
                  <field name="album_group_id"/>
-                 <field name="song_id"/>
+                 <field name="song_ids"/>
             </tree>
         </field>
     </record>

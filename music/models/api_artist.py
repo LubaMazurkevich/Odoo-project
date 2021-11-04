@@ -16,8 +16,8 @@ class ApiArtist(models.Model):
     country_id = fields.Many2one("res.country", string="Country")
     month_listeners = fields.Integer(string="Month listeners")
 
-    album_id = fields.One2many(comodel_name="api.album", inverse_name="artist_id", string="Album")
-    song_id = fields.Many2many(comodel_name="api.song", string="Song")
+    album_ids = fields.One2many(comodel_name="api.album", inverse_name="artist_id", string="Album")
+    song_ids = fields.Many2many(comodel_name="api.song", string="Song")
     artist_group_id = fields.Many2one(comodel_name="api.group", string="Group")
 
 

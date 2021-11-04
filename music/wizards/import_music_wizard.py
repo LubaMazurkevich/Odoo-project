@@ -135,9 +135,9 @@ class ImportMusicWizard(models.TransientModel):
         if song_dct:
             song = self.env["api.song"].create(song_dct)
             if group:
-                song.song_group_id = [(4, group.id, 0)]
+                song.song_group_ids = [(4, group.id, 0)]
             if artist:
-                song.artist_id = [(4, artist.id, 0)]
+                song.artist_ids = [(4, artist.id, 0)]
             if album:
                 song.album_id = album.id
 
@@ -162,4 +162,4 @@ class ImportMusicWizard(models.TransientModel):
             if artist:
                 album.artist_id = artist.id
             if songs:
-                album.song_id = [(4, songs.id, 0)]
+                album.song_ids = [(4, songs.id, 0)]
