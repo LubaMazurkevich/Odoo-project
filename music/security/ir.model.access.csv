@@ -1,8 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_api_artist,api.artist,model_api_artist,base.group_user,1,1,1,1
 
-access_song,song,model_song,base.group_user,1,1,1,1
 access_import_music_wizard,import.music.wizard,model_import_music_wizard,base.group_user,1,1,1,1
 
 access_api_group,api.group,model_api_group,base.group_user,1,1,1,1
 access_api_album,api.album,model_api_album,base.group_user,1,1,1,1
-access_api_artist,api.artist,model_api_artist,base.group_user,1,1,1,1
+access_api_song,api.song,model_api_song,base.group_user,1,1,1,1
+

@@ -1,4 +1,3 @@
-
 from odoo import models, fields
 
 
@@ -18,7 +17,7 @@ class ApiArtist(models.Model):
     month_listeners = fields.Integer(string="Month listeners")
 
     album_id = fields.One2many(comodel_name="api.album", inverse_name="artist_id", string="Album")
-    song_id = fields.Many2many(comodel_name="song", string="Song")
+    song_id = fields.Many2many(comodel_name="api.song", string="Song")
     artist_group_id = fields.Many2one(comodel_name="api.group", string="Group")
 
 

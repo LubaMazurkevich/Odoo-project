@@ -1,10 +1,9 @@
-
 from odoo import models, fields
 
 
-class Song(models.Model):
+class ApiSong(models.Model):
 
-    _name = "song"
+    _name = "api.song"
     _description = "Song"
 
     name = fields.Char(string="Name")

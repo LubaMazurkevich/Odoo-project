@@ -133,7 +133,7 @@ class ImportMusicWizard(models.TransientModel):
         else:
             _logger.warning(f"Parsing error for music file:song listeners")
         if song_dct:
-            song = self.env["song"].create(song_dct)
+            song = self.env["api.song"].create(song_dct)
             if group:
                 song.song_group_id = [(4, group.id, 0)]
             if artist:

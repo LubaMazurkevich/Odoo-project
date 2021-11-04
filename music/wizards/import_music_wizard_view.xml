@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_upload_file" model="ir.actions.act_window">
-        <field name="name">Files</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">import.music.wizard</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="music_form_upload_file"/>
-        <field name="target">new</field>
-    </record>
-
     <record id="music_form_upload_file" model="ir.ui.view">
         <field name="name">import.music.wizard.form</field>
         <field name="model">import.music.wizard</field>
@@ -27,5 +18,13 @@
         </field>
     </record>
 
+    <record id="action_upload_file" model="ir.actions.act_window">
+        <field name="name">Files</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.music.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="music_form_upload_file"/>
+        <field name="target">new</field>
+    </record>
 </odoo>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="group_action" model="ir.actions.act_window">
-        <field name="name"> Groups</field>
+        <field name="name">Groups</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">api.group</field>
         <field name="view_mode">kanban,form,tree</field>
@@ -68,9 +68,9 @@
 
     <menuitem
         id="group_root_item"
-        parent="song_root_item"
         name="Groups"
         action="group_action"
+        parent="song_root_item"
         sequence="10"/>
 
     <menuitem

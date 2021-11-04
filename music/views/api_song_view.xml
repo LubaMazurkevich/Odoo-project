@@ -3,13 +3,13 @@
     <record id="action_song" model="ir.actions.act_window">
         <field name="name">Songs</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">song</field>
+        <field name="res_model">api.song</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="song_form_view" model="ir.ui.view">
-        <field name="name">song.form</field>
-        <field name="model">song</field>
+        <field name="name">api.song.form</field>
+        <field name="model">api.song</field>
         <field name="arch" type="xml">
             <form string="Songs">
                 <group>
@@ -25,8 +25,8 @@
     </record>
 
     <record id="song_tree_view" model="ir.ui.view">
-        <field name="name">song.tree</field>
-        <field name="model">song</field>
+        <field name="name">api.song.tree</field>
+        <field name="model">api.song</field>
         <field name="arch" type="xml">
             <tree string="Info about songs">
                 <field name="name"/>
@@ -40,8 +40,8 @@
     </record>
 
     <record id="song_kanban_view" model="ir.ui.view">
-        <field name="name">song.kanban</field>
-        <field name="model">song</field>
+        <field name="name">api.song.kanban</field>
+        <field name="model">api.song</field>
         <field name="arch" type="xml">
             <kanban>
                 <templates>
@@ -61,5 +61,4 @@
             </kanban>
         </field>
     </record>
-
 </odoo>

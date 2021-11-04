@@ -11,4 +11,4 @@ class ApiAlbum(models.Model):
 
     artist_id = fields.Many2one(comodel_name="api.artist", string="Artist")
     album_group_id = fields.Many2one(comodel_name="api.group", string="Group")
-    song_id = fields.One2many(comodel_name="song", inverse_name="album_id", string="Song")
+    song_id = fields.One2many(comodel_name="api.song", inverse_name="album_id", string="Song")
