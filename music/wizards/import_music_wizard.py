@@ -115,6 +115,24 @@ class ImportMusicWizard(models.TransientModel):
             if group_singles:
                 self.make_singles(group_singles, group=group)
 
+    def make_member(self, member_root, song=None):
+        member_name = member_root.find("name")
+        if member_name is not None:
+            artist_id = self.env["api.artist"].search([("name", "=", member_name.text.strip())]).id
+            if artist_id:
+                song.artist_ids = [(4, artist_id, 0)]
+            else:
+                pass
+            group_id = self.env["api.group"].search([("name", "=", member_name.text.strip())])
+            if group_id:
+                song.song_group_ids = [(4, group_id, 0)]
+            else:
+                pass
+
+    def make_members(self, members_root, song=None):
+        for members in members_root.iterfind(".//member"):
+            self.make_member(members, song)
+
     def make_song(self, song_root, group=None, artist=None, album=None):
         song_dct = {}
         song_name = song_root.find("name")
@@ -132,14 +150,21 @@ class ImportMusicWizard(models.TransientModel):
             song_dct["listeners"] = song_listeners.text.strip()
         else:
             _logger.warning(f"Parsing error for music file:song listeners")
-        if song_dct:
-            song = self.env["api.song"].create(song_dct)
+        song_members = song_root.find("members")
+        if song_dct or song_members:
+            song = self.env["api.song"].search([("name", "=", song_dct["name"])])
+            if song:
+                song.update(song_dct)
+            else:
+                song = self.env["api.song"].create(song_dct)
             if group:
                 song.song_group_ids = [(4, group.id, 0)]
             if artist:
                 song.artist_ids = [(4, artist.id, 0)]
             if album:
                 song.album_id = album.id
+            if song_members:
+                self.make_members(song_members, song=song)
 
     def make_album(self, album_root, group, artist, songs):
         album_dct = {}
