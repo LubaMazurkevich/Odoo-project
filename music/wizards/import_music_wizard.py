@@ -1,6 +1,6 @@
+from odoo import models, fields
 import base64
 from datetime import datetime
-from odoo import models, fields
 import xml.etree.ElementTree as ET
 import logging
 _logger = logging.getLogger(__name__)

@@ -4,8 +4,10 @@ from odoo import models, fields , api
 class PolishTest(models.Model):
 
     _name = "polish.test"
+    _order = "sequence"
     _description = "Polish Test"
     text = fields.Text(string="Text")
+    sequence = fields.Integer(string="Sequence")
     select1 = fields.Selection([
             ("1", "1"),
             ("2", "2"),
@@ -32,7 +34,7 @@ class PolishTest(models.Model):
     note = fields.Char(string="Note")
 
     partner_id = fields.Many2one(comodel_name="res.partner", string="Partner")
-
+    partner_ids = fields.One2many(comodel_name="res.partner", string="Res Partner", inverse_name="polish_id")
     @api.onchange("check_all")
     def _onchange_check_all(self):
         print("Зашла сюда")
@@ -71,6 +73,9 @@ class PolishTest(models.Model):
                 "view_mode": "form",
                 "target": "new",
                 "context": {"default_note": self.note}}
+
+
+
 
 
 

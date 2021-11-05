@@ -38,24 +38,27 @@
                 <button name="action_wiz_open" string="Update note" type="object"/>
                 <sheet>
                         <group>
-                            <field name="note"/>
-                            <field name="check1"/>
-                            <field name="check2"/>
-                            <field name="check_all"/>
-                            <field name="select1"/>
-                            <field name="select2"/>
-                            <field name="partner_id" domain="[('is_polish', '=', True)]"/>
+<!--                            <field name="note"/>-->
+<!--                            <field name="check1"/>-->
+<!--                            <field name="check2"/>-->
+<!--                            <field name="check_all"/>-->
+<!--                            <field name="select1"/>-->
+<!--                            <field name="select2"/>-->
+<!--                            <field name="partner_id" domain="[('is_polish', '=', True)]"/>-->
                         </group>
                         <group>
-                            <field name="boolean1" attrs= "{'invisible': [('select2', '!=', '4'),('select1', '!=', '1')]}"/>
-                            <field name="boolean4" attrs= "{'invisible': [('select1', '!=', '2'),('select2', '!=', '4')]}"/>
-                            <field name="boolean7" attrs= "{'invisible': [('select1', '!=', '3'),('select2', '!=', '4')]}"/>
-                            <field name="boolean2" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '1')]}"/>
-                            <field name="boolean5" attrs= "{'invisible': [('select1', '!=', '2'),('select2', '!=', '5')]}"/>
-                            <field name="boolean3" attrs= "{'invisible': [('select1', '!=', '1'),('select2', '!=', '6')]}"/>
-                            <field name="boolean6" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '2')]}"/>
-                            <field name="boolean9" attrs= "{'invisible': [('select1', '!=', '3'),('select2', '!=', '6')]}"/>
-                            <field name="boolean8" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '3')]}"/>
+<!--                            <field name="partner_ids" widget="many2many_tags"/>-->
+<!--                             <field name="text" widget="html"/>-->
+<!--                            <field name="partner_id" widget="radio"/>-->
+                            <field name="boolean1" widget="boolean_toggle"/>
+<!--                            <field name="boolean4" attrs= "{'invisible': [('select1', '!=', '2'),('select2', '!=', '4')]}"/>-->
+<!--                            <field name="boolean7" attrs= "{'invisible': [('select1', '!=', '3'),('select2', '!=', '4')]}"/>-->
+<!--                            <field name="boolean2" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '1')]}"/>-->
+<!--                            <field name="boolean5" attrs= "{'invisible': [('select1', '!=', '2'),('select2', '!=', '5')]}"/>-->
+<!--                            <field name="boolean3" attrs= "{'invisible': [('select1', '!=', '1'),('select2', '!=', '6')]}"/>-->
+<!--                            <field name="boolean6" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '2')]}"/>-->
+<!--                            <field name="boolean9" attrs= "{'invisible': [('select1', '!=', '3'),('select2', '!=', '6')]}"/>-->
+<!--                            <field name="boolean8" attrs= "{'invisible': [('select2', '!=', '5'),('select1', '!=', '3')]}"/>-->
                         </group>
                 </sheet>
             </form>
@@ -67,19 +70,10 @@
         <field name="model">polish.test</field>
         <field name="arch" type="xml">
             <tree string="Info about polish test">
-                <field name="boolean1"/>
+                <field name="sequence" widget="handle"/>
+                <field name="boolean1" />
                 <field name="boolean2"/>
                 <field name="boolean3"/>
-                <field name="boolean4"/>
-                <field name="boolean5"/>
-                <field name="boolean6"/>
-                <field name="boolean7"/>
-                <field name="boolean8"/>
-                <field name="boolean9"/>
-                <field name="text"/>
-                <field name="check1"/>
-                <field name="check2"/>
-                <field name="check_all"/>
             </tree>
         </field>
     </record>
