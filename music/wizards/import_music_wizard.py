@@ -29,10 +29,16 @@ class ImportMusicWizard(models.TransientModel):
             self.parse_groups(groups_root)
 
     def parse_artists(self, artists_root, group=None):
+        '''
+        Find root for artist
+        '''
         for artist in artists_root.iterfind(".//artist"):
             self.make_artist(artist, group)
 
     def parse_groups(self, groups_root):
+        '''
+        Find root for group
+        '''
         for group in groups_root.iterfind(".//group"):
             self.make_group(group)
 
@@ -41,6 +47,7 @@ class ImportMusicWizard(models.TransientModel):
         Make artist ,the second condition in IF in order to check if there is text inside the tag.
         Artist creating only with not empty field Name.
         If exists artist with the same name-updating with new data, else-creating new artist.
+        Adding relation with group.
         '''
         artist_dct = {}
         artist_name = artist_root.find("name")
@@ -90,18 +97,33 @@ class ImportMusicWizard(models.TransientModel):
                 self.make_albums(artist_albums, artist=artist)
 
     def make_singles(self, single_root, group=None, artist=None):
+        '''
+        Find root for songs
+        '''
         for single in single_root.iterfind(".//songs"):
             self.make_songs(single, group, artist)
 
     def make_songs(self, songs_root, group=None, artist=None, album=None):
+        '''
+        Find root for song
+        '''
         for songs in songs_root.iterfind(".//song"):
             self.make_song(songs, group, artist, album)
 
     def make_albums(self, albums_root, group=None, artist=None, songs=None):
+        '''
+        Find root for album
+        '''
         for album in albums_root.iterfind(".//album"):
             self.make_album(album, group, artist, songs)
 
     def make_group(self, group_root):
+        '''
+        Make group ,the second condition in IF in order to check if there is text inside the tag.
+        Artist creating only with not empty field Name.
+        If exists group with the same name-updating with new data, else-creating new artist.
+        Find root for group_artists/group_albums/group_singles.
+        '''
         group_dct = {}
         group_month_listeners = group_root.find("month_listeners")
         if group_month_listeners is not None and group_month_listeners.text is not None:
@@ -133,6 +155,9 @@ class ImportMusicWizard(models.TransientModel):
                 self.make_singles(group_singles, group=group)
 
     def make_member(self, member_root, song=None):
+        '''
+        Make member for song:artist or group.Adding member only by existing artist or group
+        '''
         member_name = member_root.find("name")
         if member_name is not None and member_name.text is not None:
             artist_id = self.env["api.artist"].search([("name", "=", member_name.text.strip())]).id
@@ -147,10 +172,20 @@ class ImportMusicWizard(models.TransientModel):
                 pass
 
     def make_members(self, members_root, song=None):
+        '''
+         Find root for members
+         '''
         for members in members_root.iterfind(".//member"):
             self.make_member(members, song)
 
     def make_song(self, song_root, group=None, artist=None, album=None):
+        '''
+        Make song ,the second condition in IF in order to check if there is text inside the tag.
+        Song creating only with not empty field Name.
+        If exists song with the same name-updating with new data, else-creating new song.
+        Adding relation for song with group/artist/album.
+        Find root for song_members.
+        '''
         song_dct = {}
         song_name = song_root.find("name")
         if song_name is not None and song_name.text is not None:
@@ -185,6 +220,13 @@ class ImportMusicWizard(models.TransientModel):
                 self.make_members(song_members, song=song)
 
     def make_album(self, album_root, group, artist, songs):
+        '''
+        Make album ,the second condition in IF in order to check if there is text inside the tag.
+        Album creating only with not empty field Name.
+        If exists album with the same name-updating with new data, else-creating new album.
+        Adding relation for album with group/artist/song.
+        Find root for album_songs.
+        '''
         album_dct = {}
         album_name = album_root.find("name")
         if album_name is not None and album_name.text is not None:
