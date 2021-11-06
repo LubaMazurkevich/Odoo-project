@@ -17,14 +17,14 @@ class ApiGroup(models.Model):
     @api.model
     def create(self, vals):
         if self.env["api.group"].search([("name", "=", vals["name"])]):
-            raise UserError("This name is already exist,please change it.")
+            raise UserError("This name for group is already exist,please change it.")
         else:
             res = super(ApiGroup, self).create(vals)
             return res
 
     def write(self, vals):
-        if self.env["api.group"].search([("name", "=", vals["name"])]):
-            raise UserError("This name is already exist,please change it.")
+        if "name" in vals and self.env["api.group"].search([("name", "=", vals["name"])]):
+            raise UserError("This name  for group is already exist,please change it.")
         else:
             res = super(ApiGroup, self).write(vals)
             return res

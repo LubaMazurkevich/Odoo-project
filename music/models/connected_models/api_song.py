@@ -18,14 +18,15 @@ class ApiSong(models.Model):
     @api.model
     def create(self, vals):
         if self.env["api.song"].search([("name", "=", vals["name"])]):
-            raise UserError("This name is already exist,please change it.")
+            raise UserError("This name for song is already exist,please change it.")
         else:
             res = super(ApiSong, self).create(vals)
             return res
 
     def write(self, vals):
-        if self.env["api.song"].search([("name", "=", vals["name"])]):
-            raise UserError("This name is already exist,please change it.")
+        if "name" in vals and self.env["api.song"].search([("name", "=", vals["name"])]):
+            raise UserError("This name for song is already exist,please change it.")
         else:
             res = super(ApiSong, self).write(vals)
             return res
+
