@@ -33,7 +33,7 @@ class ImportMusicWizard(models.TransientModel):
         for group in groups_root.iterfind(".//group"):
             self.make_group(group)
 
-    def make_artist(self, artist_root, group):
+    def make_artist(self, artist_root, group): #проверка на дубликат
         artist_dct = {}
         artist_name = artist_root.find("name")
         if artist_name is not None:
@@ -69,7 +69,11 @@ class ImportMusicWizard(models.TransientModel):
         artist_albums = artist_root.find("albums")
 
         if artist_dct or artist_singles or artist_albums or group:
-            artist = self.env["api.artist"].create(artist_dct)
+            artist = self.env["api.artist"].search([("name", "=", artist_dct["name"])])
+            if artist:
+                artist.update(artist_dct)
+            else:
+                artist = self.env["api.artist"].create(artist_dct)
             if group:
                 artist.artist_group_id = group.id
             if artist_singles:
@@ -89,7 +93,7 @@ class ImportMusicWizard(models.TransientModel):
         for album in albums_root.iterfind(".//album"):
             self.make_album(album, group, artist, songs)
 
-    def make_group(self, group_root):
+    def make_group(self, group_root): #проверка на дубликат есть
         group_dct = {}
         group_month_listeners = group_root.find("month_listeners")
         if group_month_listeners is not None:
@@ -107,7 +111,11 @@ class ImportMusicWizard(models.TransientModel):
         group_singles = group_root.find("singles")
 
         if group_dct or group_artists or group_albums or group_singles:
-            group = self.env["api.group"].create(group_dct)
+            group = self.env["api.group"].search([("name", "=", group_dct["name"])])
+            if group:
+                group.update(group_dct)
+            else:
+                group = self.env["api.group"].create(group_dct)
             if group_artists:
                 self.parse_artists(group_artists, group=group)
             if group_albums:
@@ -117,20 +125,20 @@ class ImportMusicWizard(models.TransientModel):
 
     def make_member(self, member_root, song=None):
         member_name = member_root.find("name")
+        print("now")
         if member_name is not None:
+            print(member_name.text.strip())
             artist_id = self.env["api.artist"].search([("name", "=", member_name.text.strip())]).id
-            print(artist_id)
             if artist_id:
-                print("here")
                 song.artist_ids = [(4, artist_id, 0)]
             else:
-                print("and here")
                 pass
             group_id = self.env["api.group"].search([("name", "=", member_name.text.strip())])
             if group_id:
                 song.song_group_ids = [(4, group_id, 0)]
             else:
                 pass
+    #из формы не могу добавить с тем же именем ,что уже есть в системе.
 
     def make_members(self, members_root, song=None):
         for members in members_root.iterfind(".//member"):
