@@ -16,6 +16,9 @@ class ApiAlbum(models.Model):
 
     @api.model
     def create(self, vals):
+        '''
+        Create new album with сhecking the name of album with the same/empty name
+        '''
         if self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
         if vals["name"] is False:
@@ -25,6 +28,9 @@ class ApiAlbum(models.Model):
             return res
 
     def write(self, vals):
+        '''
+        Edit album with сhecking the name of album with the same/empty name
+        '''
         if "name" in vals and self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
         if "name" in vals and vals["name"] is False:

@@ -23,6 +23,9 @@ class ApiArtist(models.Model):
 
     @api.model
     def create(self, vals):
+        '''
+         Create new artist with сhecking the name of artist with the same/empty name
+         '''
         if self.env["api.artist"].search([("name", "=", vals["name"])]):
             raise UserError("This name for artist is already exist,please change it.")
         if vals["name"] is False:
@@ -32,6 +35,9 @@ class ApiArtist(models.Model):
             return res
 
     def write(self, vals):
+        '''
+        Edit artist with сhecking the name of artist with the same/empty name
+        '''
         if "name" in vals and self.env["api.artist"].search([("name", "=", vals["name"])]):
             raise UserError("This name for artist is already exist,please change it.")
         if "name" in vals and vals["name"] is False:

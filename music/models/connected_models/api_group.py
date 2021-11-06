@@ -16,7 +16,9 @@ class ApiGroup(models.Model):
 
     @api.model
     def create(self, vals):
-        print(vals["name"])
+        '''
+         Create new group with сhecking the name of group with the same/empty name
+         '''
         if self.env["api.group"].search([("name", "=", vals["name"])]):
             raise UserError("This name for group is already exist,please change it.")
         if vals["name"] is False:
@@ -26,6 +28,9 @@ class ApiGroup(models.Model):
             return res
 
     def write(self, vals):
+        '''
+        Edit group with сhecking the name of group with the same/empty name
+        '''
         if "name" in vals and self.env["api.group"].search([("name", "=", vals["name"])]):
             raise UserError("This name  for group is already exist,please change it.")
         if "name" in vals and vals["name"] is False:

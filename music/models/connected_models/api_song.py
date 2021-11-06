@@ -17,6 +17,9 @@ class ApiSong(models.Model):
 
     @api.model
     def create(self, vals):
+        '''
+         Create new song with сhecking the name of song with the same/empty name
+         '''
         if self.env["api.song"].search([("name", "=", vals["name"])]):
             raise UserError("This name for song is already exist,please change it.")
         if vals["name"] is False:
@@ -26,6 +29,9 @@ class ApiSong(models.Model):
             return res
 
     def write(self, vals):
+        '''
+        Edit song with сhecking the name of song with the same/empty name
+        '''
         if "name" in vals and self.env["api.song"].search([("name", "=", vals["name"])]):
             raise UserError("This name for song is already exist,please change it.")
         if "name" in vals and vals["name"] is False:

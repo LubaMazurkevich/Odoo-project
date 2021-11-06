@@ -14,6 +14,9 @@ class ImportMusicWizard(models.TransientModel):
     file = fields.Binary(string="File", required=True)
 
     def upload_file_wizard(self):
+        '''
+        Loading file and find root for Artists/Groups
+        '''
         file = base64.b64decode(self.file)
         file_string = file.decode('utf-8')
         root = ET.fromstring(file_string)
@@ -34,9 +37,14 @@ class ImportMusicWizard(models.TransientModel):
             self.make_group(group)
 
     def make_artist(self, artist_root, group):
+        '''
+        Make artist ,the second condition in IF in order to check if there is text inside the tag.
+        Artist creating only with not empty field Name.
+        If exists artist with the same name-updating with new data, else-creating new artist.
+        '''
         artist_dct = {}
         artist_name = artist_root.find("name")
-        if artist_name is not None and artist_name.text is not None: #второе условие для того что бы если внутри тега нет текста
+        if artist_name is not None and artist_name.text is not None:
             artist_dct["name"] = artist_name.text.strip()
         else:
             _logger.warning(f"Parsing error for music file: name for artist")
