@@ -28,6 +28,8 @@ class ApiGroup(models.Model):
     def write(self, vals):
         if "name" in vals and self.env["api.group"].search([("name", "=", vals["name"])]):
             raise UserError("This name  for group is already exist,please change it.")
+        if "name" in vals and vals["name"] is False:
+            raise UserError("Name for group can't be empty")
         else:
             res = super(ApiGroup, self).write(vals)
             return res

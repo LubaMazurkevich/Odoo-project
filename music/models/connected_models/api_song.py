@@ -28,6 +28,8 @@ class ApiSong(models.Model):
     def write(self, vals):
         if "name" in vals and self.env["api.song"].search([("name", "=", vals["name"])]):
             raise UserError("This name for song is already exist,please change it.")
+        if "name" in vals and vals["name"] is False:
+            raise UserError("Name for song can't be empty")
         else:
             res = super(ApiSong, self).write(vals)
             return res

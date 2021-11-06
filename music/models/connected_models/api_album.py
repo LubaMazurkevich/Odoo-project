@@ -27,6 +27,8 @@ class ApiAlbum(models.Model):
     def write(self, vals):
         if "name" in vals and self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
+        if "name" in vals and vals["name"] is False:
+            raise UserError("Name for album can't be empty")
         else:
             res = super(ApiAlbum, self).write(vals)
             return res

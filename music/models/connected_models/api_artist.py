@@ -34,6 +34,8 @@ class ApiArtist(models.Model):
     def write(self, vals):
         if "name" in vals and self.env["api.artist"].search([("name", "=", vals["name"])]):
             raise UserError("This name for artist is already exist,please change it.")
+        if "name" in vals and vals["name"] is False:
+            raise UserError("Name for artist can't be empty")
         else:
             res = super(ApiArtist, self).write(vals)
             return res
