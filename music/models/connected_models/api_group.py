@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields,api
+from odoo.exceptions import UserError
 
 
 class ApiGroup(models.Model):
@@ -12,3 +13,18 @@ class ApiGroup(models.Model):
     artist_ids = fields.One2many(comodel_name="api.artist", inverse_name="artist_group_id", string="Artist")
     song_ids = fields.Many2many(comodel_name="api.song", string="Song")
     album_ids = fields.One2many(comodel_name="api.album", inverse_name="album_group_id", string="Album")
+
+    @api.model
+    def create(self, vals):
+        if self.env["api.group"].search([("name", "=", vals["name"])]):
+            raise UserError("This name is already exist,please change it.")
+        else:
+            res = super(ApiGroup, self).create(vals)
+            return res
+
+    def write(self, vals):
+        if self.env["api.group"].search([("name", "=", vals["name"])]):
+            raise UserError("This name is already exist,please change it.")
+        else:
+            res = super(ApiGroup, self).write(vals)
+            return res

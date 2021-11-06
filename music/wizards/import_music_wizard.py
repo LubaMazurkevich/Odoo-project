@@ -33,7 +33,7 @@ class ImportMusicWizard(models.TransientModel):
         for group in groups_root.iterfind(".//group"):
             self.make_group(group)
 
-    def make_artist(self, artist_root, group): #проверка на дубликат
+    def make_artist(self, artist_root, group):
         artist_dct = {}
         artist_name = artist_root.find("name")
         if artist_name is not None:
@@ -93,7 +93,7 @@ class ImportMusicWizard(models.TransientModel):
         for album in albums_root.iterfind(".//album"):
             self.make_album(album, group, artist, songs)
 
-    def make_group(self, group_root): #проверка на дубликат есть
+    def make_group(self, group_root):
         group_dct = {}
         group_month_listeners = group_root.find("month_listeners")
         if group_month_listeners is not None:
@@ -138,13 +138,12 @@ class ImportMusicWizard(models.TransientModel):
                 song.song_group_ids = [(4, group_id, 0)]
             else:
                 pass
-    #из формы не могу добавить с тем же именем ,что уже есть в системе.
 
     def make_members(self, members_root, song=None):
         for members in members_root.iterfind(".//member"):
             self.make_member(members, song)
 
-    def make_song(self, song_root, group=None, artist=None, album=None): #проверка на дубликат есть!
+    def make_song(self, song_root, group=None, artist=None, album=None):
         song_dct = {}
         song_name = song_root.find("name")
         if song_name is not None:
@@ -177,7 +176,7 @@ class ImportMusicWizard(models.TransientModel):
             if song_members:
                 self.make_members(song_members, song=song)
 
-    def make_album(self, album_root, group, artist, songs): #проверка на дубликат
+    def make_album(self, album_root, group, artist, songs):
         album_dct = {}
         album_name = album_root.find("name")
         if album_name is not None:
