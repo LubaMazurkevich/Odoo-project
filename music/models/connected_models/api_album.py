@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields,api
+from odoo.exceptions import UserError
 
 
 class ApiAlbum(models.Model):
@@ -11,3 +12,13 @@ class ApiAlbum(models.Model):
     artist_id = fields.Many2one(comodel_name="api.artist", string="Artist")
     album_group_id = fields.Many2one(comodel_name="api.group", string="Group")
     song_ids = fields.One2many(comodel_name="api.song", inverse_name="album_id", string="Song")
+
+
+    @api.model
+    def create(self, vals):
+        if self.env["api.album"].search([("name", "=", vals["name"])]):
+            raise UserError("This name is already exist,please change it.")
+        else:
+            res = super(ApiAlbum, self).create(vals)
+            return res
+

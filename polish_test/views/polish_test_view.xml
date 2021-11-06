@@ -44,7 +44,7 @@
 <!--                            <field name="check_all"/>-->
 <!--                            <field name="select1"/>-->
 <!--                            <field name="select2"/>-->
-<!--                            <field name="partner_id" domain="[('is_polish', '=', True)]"/>-->
+                            <field name="partner_id" domain="[('is_polish', '=', True)]"/>
                         </group>
                         <group>
 <!--                            <field name="partner_ids" widget="many2many_tags"/>-->
