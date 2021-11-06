@@ -16,8 +16,11 @@ class ApiGroup(models.Model):
 
     @api.model
     def create(self, vals):
+        print(vals["name"])
         if self.env["api.group"].search([("name", "=", vals["name"])]):
             raise UserError("This name for group is already exist,please change it.")
+        if vals["name"] is False:
+            raise UserError("Name for group can't be empty")
         else:
             res = super(ApiGroup, self).create(vals)
             return res

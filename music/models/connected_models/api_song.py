@@ -19,6 +19,8 @@ class ApiSong(models.Model):
     def create(self, vals):
         if self.env["api.song"].search([("name", "=", vals["name"])]):
             raise UserError("This name for song is already exist,please change it.")
+        if vals["name"] is False:
+            raise UserError("Name for song can't be empty")
         else:
             res = super(ApiSong, self).create(vals)
             return res

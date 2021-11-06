@@ -25,6 +25,8 @@ class ApiArtist(models.Model):
     def create(self, vals):
         if self.env["api.artist"].search([("name", "=", vals["name"])]):
             raise UserError("This name for artist is already exist,please change it.")
+        if vals["name"] is False:
+            raise UserError("Name for artist can't be empty")
         else:
             res = super(ApiArtist, self).create(vals)
             return res

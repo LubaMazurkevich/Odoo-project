@@ -18,6 +18,8 @@ class ApiAlbum(models.Model):
     def create(self, vals):
         if self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
+        if vals["name"] is False:
+            raise UserError("Name for album can't be empty")
         else:
             res = super(ApiAlbum, self).create(vals)
             return res
