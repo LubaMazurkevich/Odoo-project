@@ -22,3 +22,9 @@ class ApiAlbum(models.Model):
             res = super(ApiAlbum, self).create(vals)
             return res
 
+    def write(self, vals):
+        if self.env["api.album"].search([("name", "=", vals["name"])]):
+            raise UserError("This name is already exist,please change it.")
+        else:
+            res = super(ApiAlbum, self).write(vals)
+            return res
