@@ -119,9 +119,12 @@ class ImportMusicWizard(models.TransientModel):
         member_name = member_root.find("name")
         if member_name is not None:
             artist_id = self.env["api.artist"].search([("name", "=", member_name.text.strip())]).id
+            print(artist_id)
             if artist_id:
+                print("here")
                 song.artist_ids = [(4, artist_id, 0)]
             else:
+                print("and here")
                 pass
             group_id = self.env["api.group"].search([("name", "=", member_name.text.strip())])
             if group_id:
@@ -133,7 +136,7 @@ class ImportMusicWizard(models.TransientModel):
         for members in members_root.iterfind(".//member"):
             self.make_member(members, song)
 
-    def make_song(self, song_root, group=None, artist=None, album=None):
+    def make_song(self, song_root, group=None, artist=None, album=None): #проверка на дубликат есть!
         song_dct = {}
         song_name = song_root.find("name")
         if song_name is not None:
@@ -166,7 +169,7 @@ class ImportMusicWizard(models.TransientModel):
             if song_members:
                 self.make_members(song_members, song=song)
 
-    def make_album(self, album_root, group, artist, songs):
+    def make_album(self, album_root, group, artist, songs): #проверка на дубликат
         album_dct = {}
         album_name = album_root.find("name")
         if album_name is not None:
@@ -179,7 +182,11 @@ class ImportMusicWizard(models.TransientModel):
             _logger.warning(f"Parsing error for music file:album release date")
         album_songs = album_root.find("songs")
         if album_dct or album_songs:
-            album = self.env["api.album"].create(album_dct)
+            album = self.env["api.album"].search([("name", "=", album_dct["name"])])
+            if album:
+                album.update(album_dct)
+            else:
+                album = self.env["api.album"].create(album_dct)
             if album_songs:
                 self.make_songs(album_songs, album=album)
             if group:
