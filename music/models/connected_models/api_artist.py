@@ -7,7 +7,7 @@ class ApiArtist(models.Model):
     _name = "api.artist"
     _description = "Artist"
 
-    name = fields.Char(string="Name")
+    name = fields.Char(required=True, string="Name")
     age = fields.Integer(string="Age")
     sex = fields.Selection([
         ('male', "Male"),
@@ -24,24 +24,20 @@ class ApiArtist(models.Model):
     @api.model
     def create(self, vals):
         """
-        Creating new artist if there is no artist with the same name and name is correct
+        Creating new artist if there is no artist with the same name
         """
         if self.env["api.artist"].search([("name", "=", vals["name"])]):
             raise UserError("This name for artist is already exist,please change it.")
-        elif vals["name"] is False:
-            raise UserError("Artist name can't be empty")
         else:
             res = super(ApiArtist, self).create(vals)
             return res
 
     def write(self, vals):
         """
-        Editing new artist if there is no artist with the same name and name is correct
+        Editing new artist if there is no artist with the same name
         """
-        if "name" in vals and self.env["api.artist"].search([("name", "=", vals["name"])]):
+        if "name" in vals and self.env["api.artist"].search([("name", "=", vals["name"])]) and vals["name"] != self.name:
             raise UserError("This name for artist is already exist,please change it.")
-        elif "name" in vals and vals["name"] is False:
-            raise UserError("Artist name can't be empty")
         else:
             res = super(ApiArtist, self).write(vals)
             return res

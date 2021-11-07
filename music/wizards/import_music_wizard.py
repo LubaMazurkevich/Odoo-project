@@ -76,7 +76,6 @@ class ImportMusicWizard(models.TransientModel):
         if "name" in artist_dct:
             artist = self.env["api.artist"].search([("name", "=", artist_dct["name"])])
             if artist:
-                del artist_dct["name"]
                 artist.update(artist_dct)
             else:
                 artist = self.env["api.artist"].create(artist_dct)
@@ -128,7 +127,6 @@ class ImportMusicWizard(models.TransientModel):
         if "name" in group_dct:
             group = self.env["api.group"].search([("name", "=", group_dct["name"])])
             if group:
-                del group_dct["name"]
                 group.update(group_dct)
             else:
                 group = self.env["api.group"].create(group_dct)
@@ -189,7 +187,6 @@ class ImportMusicWizard(models.TransientModel):
         if "name" in song_dct:
             song = self.env["api.song"].search([("name", "=", song_dct["name"])])
             if song:
-                del song_dct["name"]
                 song.update(song_dct)
             else:
                 song = self.env["api.song"].create(song_dct)

@@ -7,7 +7,7 @@ class ApiAlbum(models.Model):
     _name = "api.album"
     _description = "Album"
 
-    name = fields.Char(string="Name")
+    name = fields.Char(required=True, string="Name")
     release_date = fields.Date(string="Date of release")
 
     artist_id = fields.Many2one(comodel_name="api.artist", string="Artist")
@@ -17,24 +17,20 @@ class ApiAlbum(models.Model):
     @api.model
     def create(self, vals):
         """
-        Creating new album if there is no album with the same name and name is correct
+        Creating new album if there is no album with the same name
         """
         if self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
-        elif vals["name"] is False:
-            raise UserError("Album name can't be empty")
         else:
             res = super(ApiAlbum, self).create(vals)
             return res
 
     def write(self, vals):
         """
-        Editing new album if there is no album with the same name and name is correct
+        Editing new album if there is no album with the same name
         """
         if "name" in vals and self.env["api.album"].search([("name", "=", vals["name"])]) and vals["name"] != self.name:
             raise UserError("This name for album is already exist,please change it.")
-        elif "name" in vals and vals["name"] is False:
-            raise UserError("Album name can't be empty")
         else:
             res = super(ApiAlbum, self).write(vals)
             return res

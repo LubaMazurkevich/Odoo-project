@@ -7,7 +7,7 @@ class ApiSong(models.Model):
     _name = "api.song"
     _description = "Song"
 
-    name = fields.Char(string="Name")
+    name = fields.Char(required=True, string="Name")
     listeners = fields.Integer(string="Listeners")
     duration = fields.Float(string="Duration")
 
@@ -18,24 +18,20 @@ class ApiSong(models.Model):
     @api.model
     def create(self, vals):
         """
-        Creating new song if there is no artist with the same name and name is correct
+        Creating new song if there is no artist with the same name
         """
         if self.env["api.song"].search([("name", "=", vals["name"])]):
             raise UserError("This name for song is already exist,please change it.")
-        elif vals["name"] is False:
-            raise UserError("Song name can't be empty")
         else:
             res = super(ApiSong, self).create(vals)
             return res
 
     def write(self, vals):
         """
-        Editing new song if there is no artist with the same name and name is correct
+        Editing new song if there is no artist with the same name
         """
-        if "name" in vals and self.env["api.song"].search([("name", "=", vals["name"])]):
+        if "name" in vals and self.env["api.song"].search([("name", "=", vals["name"])]) and vals["name"] != self.name:
             raise UserError("This name for song is already exist,please change it.")
-        elif "name" in vals and vals["name"] is False:
-            raise UserError("Song name can't be empty")
         else:
             res = super(ApiSong, self).write(vals)
             return res
