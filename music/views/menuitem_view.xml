@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <odoo>
-        <menuitem
-            id="song_root_item"
-            name="Music"
-            action="action_song"
-            sequence="10"/>
+<odoo>
+    <menuitem
+        id="music_root_item"
+        name="Music"
+        action="action_song"
+        sequence="1"/>
 
-        <menuitem
-            id="group_root_item"
-            name="Groups"
-            action="group_action"
-            parent="song_root_item"
-            sequence="10"/>
+    <menuitem
+        id="group_root_item"
+        name="Groups"
+        action="group_action"
+        parent="music_root_item"
+        sequence="2"/>
 
-        <menuitem
-            id="artist_root_item"
-            parent="song_root_item"
-            name="Artists"
-            action="artist_action"
-            sequence="10"/>
+    <menuitem
+        id="artist_root_item"
+        parent="music_root_item"
+        name="Artists"
+        action="artist_action"
+        sequence="3"/>
 
-        <menuitem
-            id="album_root_item"
-            parent="song_root_item"
-            name="Albums"
-            action="album_action"
-            sequence="10"/>
+    <menuitem
+        id="album_root_item"
+        parent="music_root_item"
+        name="Albums"
+        action="album_action"
+        sequence="4"/>
 
-        <menuitem
-            id="wiz_group_root_item"
-            parent="song_root_item"
-            name="Load file"
-            action="action_upload_file"
-            sequence="10"/>
+    <menuitem
+        id="song_root_item"
+        name="Songs"
+        action="action_song"
+        parent="music_root_item"
+        sequence="5"/>
+
+    <menuitem
+        id="wiz_group_root_item"
+        parent="music_root_item"
+        name="Load file"
+        action="action_upload_file"
+        sequence="6"/>
 </odoo>

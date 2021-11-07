@@ -49,10 +49,8 @@
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <ul>
-                                    <li>Name:<strong><span><field name="name"/></span></strong>
-                                    </li>
-                                    <li>Listeners:<field name="listeners"/>
-                                    </li>
+                                    <li>Name:<strong><span><field name="name"/></span></strong></li>
+                                    <li>Listeners:<field name="listeners"/></li>
                                 </ul>
                             </div>
                         </div>

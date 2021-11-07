@@ -16,25 +16,25 @@ class ApiGroup(models.Model):
 
     @api.model
     def create(self, vals):
-        '''
-         Create new group with сhecking the name of group with the same/empty name
-         '''
+        """
+        Creating new group if there is no group with the same name and name is correct
+        """
         if self.env["api.group"].search([("name", "=", vals["name"])]):
             raise UserError("This name for group is already exist,please change it.")
-        if vals["name"] is False:
-            raise UserError("Name for group can't be empty")
+        elif vals["name"] is False:
+            raise UserError("Group name can't be empty")
         else:
             res = super(ApiGroup, self).create(vals)
             return res
 
     def write(self, vals):
-        '''
-        Edit group with сhecking the name of group with the same/empty name
-        '''
+        """
+        Editing new group if there is no group with the same name and name is correct
+        """
         if "name" in vals and self.env["api.group"].search([("name", "=", vals["name"])]):
             raise UserError("This name  for group is already exist,please change it.")
-        if "name" in vals and vals["name"] is False:
-            raise UserError("Name for group can't be empty")
+        elif "name" in vals and vals["name"] is False:
+            raise UserError("Group name can't be empty")
         else:
             res = super(ApiGroup, self).write(vals)
             return res

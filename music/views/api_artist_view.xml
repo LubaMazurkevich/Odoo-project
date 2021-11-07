@@ -30,13 +30,12 @@
         <field name="name">api.artist.tree</field>
         <field name="model">api.artist</field>
         <field name="arch" type="xml">
-            <tree string="Info about artists">
+            <tree string="Artists info">
                 <field name="name"/>
                 <field name="age"/>
                 <field name="sex"/>
                 <field name="country_id"/>
                 <field name="month_listeners"/>
-
                 <field name="album_ids"/>
                 <field name="song_ids"/>
                 <field name="artist_group_id"/>
@@ -54,10 +53,8 @@
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <ul>
-                                    <li>Name:<strong><span><field name="name"/></span></strong>
-                                    </li>
-                                    <li>Month listeners:<field name="month_listeners"/>
-                                    </li>
+                                    <li>Name:<strong><span><field name="name"/></span></strong></li>
+                                    <li>Month listeners:<field name="month_listeners"/></li>
                                 </ul>
                             </div>
                         </div>

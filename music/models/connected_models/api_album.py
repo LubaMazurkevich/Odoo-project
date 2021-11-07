@@ -9,32 +9,32 @@ class ApiAlbum(models.Model):
 
     name = fields.Char(string="Name")
     release_date = fields.Date(string="Date of release")
+
     artist_id = fields.Many2one(comodel_name="api.artist", string="Artist")
     album_group_id = fields.Many2one(comodel_name="api.group", string="Group")
     song_ids = fields.One2many(comodel_name="api.song", inverse_name="album_id", string="Song")
 
-
     @api.model
     def create(self, vals):
-        '''
-        Create new album with сhecking the name of album with the same/empty name
-        '''
+        """
+        Creating new album if there is no album with the same name and name is correct
+        """
         if self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
-        if vals["name"] is False:
-            raise UserError("Name for album can't be empty")
+        elif vals["name"] is False:
+            raise UserError("Album name can't be empty")
         else:
             res = super(ApiAlbum, self).create(vals)
             return res
 
     def write(self, vals):
-        '''
-        Edit album with сhecking the name of album with the same/empty name
-        '''
+        """
+        Editing new album if there is no album with the same name and name is correct
+        """
         if "name" in vals and self.env["api.album"].search([("name", "=", vals["name"])]):
             raise UserError("This name for album is already exist,please change it.")
-        if "name" in vals and vals["name"] is False:
-            raise UserError("Name for album can't be empty")
+        elif "name" in vals and vals["name"] is False:
+            raise UserError("Album name can't be empty")
         else:
             res = super(ApiAlbum, self).write(vals)
             return res

@@ -11,14 +11,9 @@
         <field name="name">api.album.form</field>
         <field name="model">api.album</field>
         <field name="arch" type="xml">
-            <form string="Artists">
+            <form string="Albums">
                 <group>
                     <field name="name"/>
-
-<!--                    <field name="name" domain="[('is_polish', '=', True)]"/>-->
-
-<!--                    self.env["api.album"].search([("name", "=", self.note)])-->
-
                     <field name="release_date"/>
                     <field name="artist_id"/>
                     <field name="album_group_id"/>
@@ -32,7 +27,7 @@
         <field name="name">api.album.tree</field>
         <field name="model">api.album</field>
         <field name="arch" type="xml">
-            <tree string="Info about albums">
+            <tree string="Albums info">
                 <field name="name"/>
                 <field name="release_date"/>
                  <field name="artist_id"/>
@@ -52,10 +47,8 @@
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <ul>
-                                    <li>Name:<strong><span><field name="name"/></span></strong>
-                                    </li>
-                                    <li>Release date:<field name="release_date"/>
-                                    </li>
+                                    <li>Name:<strong><span><field name="name"/></span></strong></li>
+                                    <li>Release date:<field name="release_date"/></li>
                                 </ul>
                             </div>
                         </div>
@@ -64,5 +57,4 @@
             </kanban>
         </field>
     </record>
-
 </odoo>

@@ -6,9 +6,7 @@
         <field name="arch" type="xml">
             <form string="Upload file">
                 <group>
-                <group>
                     <field name="file"/>
-                    </group>
                 </group>
                 <footer>
                     <button name="upload_file_wizard" type="object" string="Upload file"/>

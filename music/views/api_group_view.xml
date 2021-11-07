@@ -13,12 +13,12 @@
         <field name="arch" type="xml">
             <form string="Groups">
                 <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="month_listeners"/>
-                            <field name="artist_ids"/>
-                            <field name="song_ids"/>
-                        </group>
+                    <group>
+                        <field name="name"/>
+                        <field name="month_listeners"/>
+                        <field name="artist_ids"/>
+                        <field name="song_ids"/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -34,10 +34,8 @@
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <ul>
-                                    <li>Name:<strong><span><field name="name"/></span></strong>
-                                    </li>
-                                    <li>Month listeners:<field name="month_listeners"/>
-                                    </li>
+                                    <li>Name:<strong><span><field name="name"/></span></strong></li>
+                                    <li>Month listeners:<field name="month_listeners"/></li>
                                 </ul>
                             </div>
                         </div>
@@ -51,7 +49,7 @@
         <field name="name">api.group.tree</field>
         <field name="model">api.group</field>
         <field name="arch" type="xml">
-            <tree string="Info about groups">
+            <tree string="Groups info">
                 <field name="name"/>
                 <field name="month_listeners"/>
                 <field name="artist_ids"/>
@@ -59,5 +57,4 @@
             </tree>
         </field>
     </record>
-
 </odoo>

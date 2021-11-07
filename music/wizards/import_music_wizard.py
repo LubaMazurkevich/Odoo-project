@@ -14,13 +14,12 @@ class ImportMusicWizard(models.TransientModel):
     file = fields.Binary(string="File", required=True)
 
     def upload_file_wizard(self):
-        '''
-        Loading file and find root for Artists/Groups
-        '''
+        """
+        Loading file and parsing Artists and Groups.
+        """
         file = base64.b64decode(self.file)
         file_string = file.decode('utf-8')
         root = ET.fromstring(file_string)
-
         artists_root = root.find("Artists")
         if artists_root:
             self.parse_artists(artists_root)
@@ -29,33 +28,29 @@ class ImportMusicWizard(models.TransientModel):
             self.parse_groups(groups_root)
 
     def parse_artists(self, artists_root, group=None):
-        '''
-        Find root for artist
-        '''
+        """
+        Parsing artists.
+        """
         for artist in artists_root.iterfind(".//artist"):
-            self.make_artist(artist, group)
+            self.parse_artist(artist, group)
 
     def parse_groups(self, groups_root):
-        '''
-        Find root for group
-        '''
+        """
+        Parsing groups.
+        """
         for group in groups_root.iterfind(".//group"):
-            self.make_group(group)
+            self.parse_group(group)
 
-    def make_artist(self, artist_root, group):
-        '''
-        Make artist ,the second condition in IF in order to check if there is text inside the tag.
-        Artist creating only with not empty field Name.
-        If exists artist with the same name-updating with new data, else-creating new artist.
-        Adding relation with group.
-        '''
+    def parse_artist(self, artist_root, group):
+        """
+        Creating/updating artist and its data.
+        """
         artist_dct = {}
         artist_name = artist_root.find("name")
         if artist_name is not None and artist_name.text is not None:
             artist_dct["name"] = artist_name.text.strip()
         else:
             _logger.warning(f"Parsing error for music file: name for artist")
-
         artist_month_listeners = artist_root.find("month_listeners")
         if artist_month_listeners is not None and artist_month_listeners.text is not None:
             artist_dct["month_listeners"] = artist_month_listeners .text.strip()
@@ -71,7 +66,6 @@ class ImportMusicWizard(models.TransientModel):
             artist_dct["sex"] = artist_sex.text.strip()
         else:
             _logger.warning(f"Parsing error for music file:sex for artist")
-
         artist_country = artist_root.find("country")
         if artist_country is not None and artist_country.text is not None:
             res_country_id = self.env["res.country"].search(['|', ("name", "=", artist_country.text.strip()), ("code", "=", artist_country.text.strip())])
@@ -79,9 +73,6 @@ class ImportMusicWizard(models.TransientModel):
                 artist_dct["country_id"] = res_country_id.id
             else:
                 _logger.warning(f"Parsing error for music file:country for artist")
-
-        artist_singles = artist_root.find("singles")
-        artist_albums = artist_root.find("albums")
         if "name" in artist_dct:
             artist = self.env["api.artist"].search([("name", "=", artist_dct["name"])])
             if artist:
@@ -91,39 +82,38 @@ class ImportMusicWizard(models.TransientModel):
                 artist = self.env["api.artist"].create(artist_dct)
             if group:
                 artist.artist_group_id = group.id
+            artist_singles = artist_root.find("singles")
             if artist_singles:
-                self.make_singles(artist_singles, artist=artist)
+                self.parse_singles(artist_singles, artist=artist)
+            artist_albums = artist_root.find("albums")
             if artist_albums:
-                self.make_albums(artist_albums, artist=artist)
+                self.parse_albums(artist_albums, artist=artist)
 
-    def make_singles(self, single_root, group=None, artist=None):
-        '''
-        Find root for songs
-        '''
+    def parse_singles(self, single_root, group=None, artist=None):
+        """
+        Parsing singles.
+        """
         for single in single_root.iterfind(".//songs"):
-            self.make_songs(single, group, artist)
+            self.parse_songs(single, group, artist)
 
-    def make_songs(self, songs_root, group=None, artist=None, album=None):
-        '''
-        Find root for song
-        '''
+    def parse_songs(self, songs_root, group=None, artist=None, album=None):
+        """
+        Parsing songs.
+        """
         for songs in songs_root.iterfind(".//song"):
-            self.make_song(songs, group, artist, album)
+            self.parse_song(songs, group, artist, album)
 
-    def make_albums(self, albums_root, group=None, artist=None, songs=None):
-        '''
-        Find root for album
-        '''
+    def parse_albums(self, albums_root, group=None, artist=None, songs=None):
+        """
+        Parsing albums.
+        """
         for album in albums_root.iterfind(".//album"):
-            self.make_album(album, group, artist, songs)
+            self.parse_album(album, group, artist, songs)
 
-    def make_group(self, group_root):
-        '''
-        Make group ,the second condition in IF in order to check if there is text inside the tag.
-        Artist creating only with not empty field Name.
-        If exists group with the same name-updating with new data, else-creating new artist.
-        Find root for group_artists/group_albums/group_singles.
-        '''
+    def parse_group(self, group_root):
+        """
+        Creating/updating group and its data.
+        """
         group_dct = {}
         group_month_listeners = group_root.find("month_listeners")
         if group_month_listeners is not None and group_month_listeners.text is not None:
@@ -135,11 +125,6 @@ class ImportMusicWizard(models.TransientModel):
             group_dct["name"] = group_name.text.strip()
         else:
             _logger.warning(f"Parsing error for music file:group name")
-
-        group_artists = group_root.find("artists")
-        group_albums = group_root.find("albums")
-        group_singles = group_root.find("singles")
-
         if "name" in group_dct:
             group = self.env["api.group"].search([("name", "=", group_dct["name"])])
             if group:
@@ -147,17 +132,20 @@ class ImportMusicWizard(models.TransientModel):
                 group.update(group_dct)
             else:
                 group = self.env["api.group"].create(group_dct)
+            group_artists = group_root.find("artists")
             if group_artists:
                 self.parse_artists(group_artists, group=group)
+            group_albums = group_root.find("albums")
             if group_albums:
-                self.make_albums(group_albums, group=group)
+                self.parse_albums(group_albums, group=group)
+            group_singles = group_root.find("singles")
             if group_singles:
-                self.make_singles(group_singles, group=group)
+                self.parse_singles(group_singles, group=group)
 
-    def make_member(self, member_root, song=None):
-        '''
-        Make member for song:artist or group.Adding member only by existing artist or group
-        '''
+    def parse_member(self, member_root, song=None):
+        """
+        Adding member for existing artist or group
+        """
         member_name = member_root.find("name")
         if member_name is not None and member_name.text is not None:
             artist_id = self.env["api.artist"].search([("name", "=", member_name.text.strip())]).id
@@ -171,21 +159,17 @@ class ImportMusicWizard(models.TransientModel):
             else:
                 pass
 
-    def make_members(self, members_root, song=None):
-        '''
-         Find root for members
-         '''
+    def parse_members(self, members_root, song=None):
+        """
+        Parsing members.
+        """
         for members in members_root.iterfind(".//member"):
-            self.make_member(members, song)
+            self.parse_member(members, song)
 
-    def make_song(self, song_root, group=None, artist=None, album=None):
-        '''
-        Make song ,the second condition in IF in order to check if there is text inside the tag.
-        Song creating only with not empty field Name.
-        If exists song with the same name-updating with new data, else-creating new song.
-        Adding relation for song with group/artist/album.
-        Find root for song_members.
-        '''
+    def parse_song(self, song_root, group=None, artist=None, album=None):
+        """
+        Creating/updating song and its data.
+        """
         song_dct = {}
         song_name = song_root.find("name")
         if song_name is not None and song_name.text is not None:
@@ -202,7 +186,6 @@ class ImportMusicWizard(models.TransientModel):
             song_dct["listeners"] = song_listeners.text.strip()
         else:
             _logger.warning(f"Parsing error for music file:song listeners")
-        song_members = song_root.find("members")
         if "name" in song_dct:
             song = self.env["api.song"].search([("name", "=", song_dct["name"])])
             if song:
@@ -216,17 +199,14 @@ class ImportMusicWizard(models.TransientModel):
                 song.artist_ids = [(4, artist.id, 0)]
             if album:
                 song.album_id = album.id
+            song_members = song_root.find("members")
             if song_members:
-                self.make_members(song_members, song=song)
+                self.parse_members(song_members, song=song)
 
-    def make_album(self, album_root, group, artist, songs):
-        '''
-        Make album ,the second condition in IF in order to check if there is text inside the tag.
-        Album creating only with not empty field Name.
-        If exists album with the same name-updating with new data, else-creating new album.
-        Adding relation for album with group/artist/song.
-        Find root for album_songs.
-        '''
+    def parse_album(self, album_root, group, artist, songs):
+        """
+        Creating/updating album and its data.
+        """
         album_dct = {}
         album_name = album_root.find("name")
         if album_name is not None and album_name.text is not None:
@@ -237,7 +217,6 @@ class ImportMusicWizard(models.TransientModel):
             album_dct["release_date"] = datetime.strptime(date_str, '%m-%d-%Y')
         else:
             _logger.warning(f"Parsing error for music file:album release date")
-        album_songs = album_root.find("songs")
         if "name" in album_dct:
             album = self.env["api.album"].search([("name", "=", album_dct["name"])])
             if album:
@@ -245,14 +224,12 @@ class ImportMusicWizard(models.TransientModel):
                 album.update(album_dct)
             else:
                 album = self.env["api.album"].create(album_dct)
+            album_songs = album_root.find("songs")
             if album_songs:
-                self.make_songs(album_songs, album=album)
+                self.parse_songs(album_songs, album=album)
             if group:
                 album.album_group_id = group.id
             if artist:
                 album.artist_id = artist.id
             if songs:
                 album.song_ids = [(4, songs.id, 0)]
-
-
-
