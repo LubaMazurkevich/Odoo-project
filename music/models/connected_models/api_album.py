@@ -31,7 +31,7 @@ class ApiAlbum(models.Model):
         """
         Editing new album if there is no album with the same name and name is correct
         """
-        if "name" in vals and self.env["api.album"].search([("name", "=", vals["name"])]):
+        if "name" in vals and self.env["api.album"].search([("name", "=", vals["name"])]) and vals["name"] != self.name:
             raise UserError("This name for album is already exist,please change it.")
         elif "name" in vals and vals["name"] is False:
             raise UserError("Album name can't be empty")

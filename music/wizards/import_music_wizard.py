@@ -220,7 +220,6 @@ class ImportMusicWizard(models.TransientModel):
         if "name" in album_dct:
             album = self.env["api.album"].search([("name", "=", album_dct["name"])])
             if album:
-                del album_dct["name"]
                 album.update(album_dct)
             else:
                 album = self.env["api.album"].create(album_dct)
