@@ -45,19 +45,19 @@ class ImportMusicWizard(models.TransientModel):
         """
         Creating/updating artist and its data.
         """
-        artist = self.env["api.artist"].search([("name", "=", artist_dct["name"])])
-        if artist:
-            artist.update(artist_dct)
+        artist_id = self.env["api.artist"].search([("name", "=", artist_dct["name"])])
+        if artist_id:
+            artist_id.update(artist_dct)
         else:
-            artist = self.env["api.artist"].create(artist_dct)
+            artist_id = self.env["api.artist"].create(artist_dct)
         if group:
-            artist.artist_group_id = group.id
+            artist_id.artist_group_id = group.id
         artist_singles = artist_root.find("singles")
         if artist_singles:
-            self.parse_singles(artist_singles, artist=artist)
+            self.parse_singles(artist_singles, artist=artist_id)
         artist_albums = artist_root.find("albums")
         if artist_albums:
-            self.parse_albums(artist_albums, artist=artist)
+            self.parse_albums(artist_albums, artist=artist_id)
 
     def parse_artist(self, artist_root, group=None):
         """
@@ -119,20 +119,20 @@ class ImportMusicWizard(models.TransientModel):
         """
         Creating/updating group and its data.
         """
-        group = self.env["api.group"].search([("name", "=", group_dct["name"])])
-        if group:
-            group.update(group_dct)
+        group_id = self.env["api.group"].search([("name", "=", group_dct["name"])])
+        if group_id:
+            group_id.update(group_dct)
         else:
-            group = self.env["api.group"].create(group_dct)
+            group_id = self.env["api.group"].create(group_dct)
         group_artists = group_root.find("artists")
         if group_artists:
-            self.parse_artists(group_artists, group=group)
+            self.parse_artists(group_artists, group=group_id)
         group_albums = group_root.find("albums")
         if group_albums:
-            self.parse_albums(group_albums, group=group)
+            self.parse_albums(group_albums, group=group_id)
         group_singles = group_root.find("singles")
         if group_singles:
-            self.parse_singles(group_singles, group=group)
+            self.parse_singles(group_singles, group=group_id)
 
     def parse_group(self, group_root):
         """
@@ -161,13 +161,9 @@ class ImportMusicWizard(models.TransientModel):
             artist_id = self.env["api.artist"].search([("name", "=", member_name.text.strip())]).id
             if artist_id:
                 song.artist_ids = [(4, artist_id, 0)]
-            else:
-                pass
             group_id = self.env["api.group"].search([("name", "=", member_name.text.strip())]).id
             if group_id:
                 song.song_group_ids = [(4, group_id, 0)]
-            else:
-                pass
 
     def parse_members(self, members_root, song):
         """
@@ -180,20 +176,20 @@ class ImportMusicWizard(models.TransientModel):
         """
         Creating/updating song and its data.
         """
-        song = self.env["api.song"].search([("name", "=", song_dct["name"])])
-        if song:
-            song.update(song_dct)
+        song_id = self.env["api.song"].search([("name", "=", song_dct["name"])])
+        if song_id:
+            song_id.update(song_dct)
         else:
-            song = self.env["api.song"].create(song_dct)
+            song_id = self.env["api.song"].create(song_dct)
         if group:
-            song.song_group_ids = [(4, group.id, 0)]
+            song_id.song_group_ids = [(4, group.id, 0)]
         if artist:
-            song.artist_ids = [(4, artist.id, 0)]
+            song_id.artist_ids = [(4, artist.id, 0)]
         if album:
-            song.album_id = album.id
+            song_id.album_id = album.id
         song_members = song_root.find("members")
         if song_members:
-            self.parse_members(song_members, song=song)
+            self.parse_members(song_members, song=song_id)
 
     def parse_song(self, song_root, group, artist, album):
         """
@@ -222,20 +218,20 @@ class ImportMusicWizard(models.TransientModel):
         """
         Creating / updating album and its data.
         """
-        album = self.env["api.album"].search([("name", "=", album_dct["name"])])
-        if album:
-            album.update(album_dct)
+        album_id = self.env["api.album"].search([("name", "=", album_dct["name"])])
+        if album_id:
+            album_id.update(album_dct)
         else:
-            album = self.env["api.album"].create(album_dct)
+            album_id = self.env["api.album"].create(album_dct)
         album_songs = album_root.find("songs")
         if album_songs:
-            self.parse_songs(album_songs, album=album)
+            self.parse_songs(album_songs, album=album_id)
         if group:
-            album.album_group_id = group.id
+            album_id.album_group_id = group.id
         if artist:
-            album.artist_id = artist.id
+            album_id.artist_id = artist.id
         if songs:
-            album.song_ids = [(4, songs.id, 0)]
+            album_id.song_ids = [(4, songs.id, 0)]
 
     def parse_album(self, album_root, group, artist, songs):
         """
