@@ -41,7 +41,7 @@ class ImportMusicWizard(models.TransientModel):
         for group in groups_root.iterfind(".//group"):
             self.parse_group(group)
 
-    def create_update_artist(self, artist_root, group, artist_dct):
+    def create_update_artist(self, artist_root, artist_dct, group):
         """
         Creating/updating artist and its data.
         """
@@ -92,7 +92,7 @@ class ImportMusicWizard(models.TransientModel):
             else:
                 _logger.warning(f"Parsing error for music file:country for artist")
         if "name" in artist_dct:
-            self.create_update_artist(artist_root, group, artist_dct)
+            self.create_update_artist(artist_root, artist_dct, group)
 
     def parse_singles(self, single_root, group=None, artist=None):
         """
@@ -152,9 +152,9 @@ class ImportMusicWizard(models.TransientModel):
         if "name" in group_dct:
             self.create_update_group(group_dct, group_root)
 
-    def parse_member(self, member_root, song=None):
+    def parse_member(self, member_root, song):
         """
-        Adding member for existing artist or group
+        Parsing member.
         """
         member_name = member_root.find("name")
         if member_name is not None and member_name.text is not None:
@@ -169,14 +169,14 @@ class ImportMusicWizard(models.TransientModel):
             else:
                 pass
 
-    def parse_members(self, members_root, song=None):
+    def parse_members(self, members_root, song):
         """
         Parsing members.
         """
         for members in members_root.iterfind(".//member"):
             self.parse_member(members, song)
 
-    def create_update_song(self, song_dct, song_root, group=None, artist=None, album=None):
+    def create_update_song(self, song_dct, song_root, group, artist, album):
         """
         Creating/updating song and its data.
         """
@@ -195,7 +195,7 @@ class ImportMusicWizard(models.TransientModel):
         if song_members:
             self.parse_members(song_members, song=song)
 
-    def parse_song(self, song_root, group=None, artist=None, album=None):
+    def parse_song(self, song_root, group, artist, album):
         """
         Parsing song.
         """
