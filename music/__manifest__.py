@@ -6,7 +6,8 @@
              "views/api_album_view.xml",
              "wizards/import_music_wizard_view.xml",
              "views/api_group_view.xml",
-             "views/menuitem_view.xml"],
+             "views/menuitem_view.xml",
+             "data/group_data.xml"],
     "depends": [],
 }
 

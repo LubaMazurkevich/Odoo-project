@@ -34,3 +34,4 @@ class ApiGroup(models.Model):
         else:
             res = super(ApiGroup, self).write(vals)
             return res
+
