@@ -49,8 +49,11 @@ class ImportMusicWizard(models.TransientModel):
         if group:
             artist_id.artist_group_id = group.id
         else:
-            group_id = self.env.ref('music.group_solo_artist').id
-            artist_id.artist_group_id = group_id
+            try:
+                group_id = self.env.ref('music.group_solo_artist').id
+                artist_id.artist_group_id = group_id
+            except:
+                _logger.warning(f"Parsing error for music file:solo artist group not found")
         artist_singles = artist_root.find("singles")
         if artist_singles:
             self.parse_singles(artist_singles, artist=artist_id)
