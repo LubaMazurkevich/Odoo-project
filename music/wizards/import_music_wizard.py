@@ -53,10 +53,8 @@ class ImportMusicWizard(models.TransientModel):
         if group:
             artist_id.artist_group_id = group.id
         else:
-            res_model, res_id = self.env["ir.model.data"].get_object_reference('music', 'group_solo_artist')
-            group_id = self.env[res_model].browse(res_id)
+            group_id = self.env.ref('music.group_solo_artist').id
             artist_id.artist_group_id = group_id
-
         artist_singles = artist_root.find("singles")
         if artist_singles:
             self.parse_singles(artist_singles, artist=artist_id)
@@ -120,15 +118,10 @@ class ImportMusicWizard(models.TransientModel):
         for album in albums_root.iterfind(".//album"):
             self.parse_album(album, group, artist, songs)
 
-    def create_update_group(self, group_dct, group_root):
+    def update_group(self, group_id, group_root):
         """
-        Creating/updating group and its data.
+        Updating group and its data.
         """
-        group_id = self.env["api.group"].search([("name", "=", group_dct["name"])])
-        if group_id:
-            group_id.update(group_dct)
-        else:
-            group_id = self.env["api.group"].create(group_dct)
         group_artists = group_root.find("artists")
         if group_artists:
             self.parse_artists(group_artists, group=group_id)
@@ -138,6 +131,14 @@ class ImportMusicWizard(models.TransientModel):
         group_singles = group_root.find("singles")
         if group_singles:
             self.parse_singles(group_singles, group=group_id)
+
+    def get_group(self, group_name, group_dct):
+        group_id = self.env["api.group"].search([("name", "=", group_name)])
+        if group_id:
+            group_id.update(group_dct)
+        else:
+            group_id = self.env["api.group"].create(group_dct)
+        return group_id
 
     def parse_group(self, group_root):
         """
@@ -155,7 +156,8 @@ class ImportMusicWizard(models.TransientModel):
         else:
             _logger.warning(f"Parsing error for music file:group name")
         if "name" in group_dct:
-            self.create_update_group(group_dct, group_root)
+            group_id = self.get_group(group_dct["name"], group_dct)
+            self.update_group(group_id, group_root)
 
     def parse_member(self, member_root, song):
         """
@@ -177,6 +179,12 @@ class ImportMusicWizard(models.TransientModel):
         for members in members_root.iterfind(".//member"):
             self.parse_member(members, song)
 
+
+    # def get_song(self):
+    #
+    # def update_song(self):
+    #
+
     def create_update_song(self, song_dct, song_root, group, artist, album):
         """
         Creating/updating song and its data.
@@ -195,6 +203,8 @@ class ImportMusicWizard(models.TransientModel):
         song_members = song_root.find("members")
         if song_members:
             self.parse_members(song_members, song=song_id)
+
+
 
     def parse_song(self, song_root, group, artist, album):
         """
@@ -218,6 +228,8 @@ class ImportMusicWizard(models.TransientModel):
             _logger.warning(f"Parsing error for music file:song listeners")
         if "name" in song_dct:
             self.create_update_song(song_dct, song_root, group, artist, album)
+
+
 
     def create_update_album(self, album_dct, album_root, group, artist, songs):
         """
