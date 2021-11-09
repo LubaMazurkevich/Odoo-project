@@ -53,8 +53,10 @@ class ImportMusicWizard(models.TransientModel):
         if group:
             artist_id.artist_group_id = group.id
         else:
-            group_solo_id = self.env["api.group"].search([("name", "=", "Solo artist",)])
-            artist_id.artist_group_id = group_solo_id
+            res_model, res_id = self.env["ir.model.data"].get_object_reference('music', 'group_solo_artist')
+            group_id = self.env[res_model].browse(res_id)
+            artist_id.artist_group_id = group_id
+
         artist_singles = artist_root.find("singles")
         if artist_singles:
             self.parse_singles(artist_singles, artist=artist_id)
