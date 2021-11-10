@@ -4,4 +4,5 @@ access_import_music_wizard,import.music.wizard,model_import_music_wizard,base.gr
 access_api_group,api.group,model_api_group,base.group_user,1,1,1,1
 access_api_album,api.album,model_api_album,base.group_user,1,1,1,1
 access_api_song,api.song,model_api_song,base.group_user,1,1,1,1
+access_update_text_wizard,music.update.text.wizard,model_music_update_text_wizard,base.group_user,1,1,1,1
 
