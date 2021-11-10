@@ -150,7 +150,7 @@ class ImportMusicWizard(models.TransientModel):
         if not group_id:
             group_id = self.env["api.group"].create({"name": group_name})
         return group_id
-#bb
+
     def parse_group(self, group_root):
         """
         Parsing group.

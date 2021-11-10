@@ -1,0 +1,279 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* music
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-10 09:18+0000\n"
+"PO-Revision-Date: 2021-11-10 12:29+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: ru\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__age
+msgid "Age"
+msgstr "Возраст"
+
+#. module: music
+#: model:ir.model,name:music.model_api_album
+#: model:ir.model.fields,field_description:music.field_api_artist__album_ids
+#: model:ir.model.fields,field_description:music.field_api_group__album_ids
+#: model:ir.model.fields,field_description:music.field_api_song__album_id
+msgid "Album"
+msgstr "Альбом"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.album_action
+#: model:ir.ui.menu,name:music.album_root_item
+#: model_terms:ir.ui.view,arch_db:music.album_form_view
+msgid "Albums"
+msgstr "Альбомы"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.album_tree_view
+msgid "Albums info"
+msgstr "Информация об альбомах"
+
+#. module: music
+#: model:ir.model,name:music.model_api_artist
+#: model:ir.model.fields,field_description:music.field_api_album__artist_id
+#: model:ir.model.fields,field_description:music.field_api_group__artist_ids
+#: model:ir.model.fields,field_description:music.field_api_song__artist_ids
+msgid "Artist"
+msgstr "Артист"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.artist_action
+#: model:ir.ui.menu,name:music.artist_root_item
+#: model_terms:ir.ui.view,arch_db:music.artist_form_view
+msgid "Artists"
+msgstr "Артисты"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.artist_tree_view
+msgid "Artists info"
+msgstr "Информация о артистах"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.music_form_upload_file
+msgid "Cancel"
+msgstr "Отменить"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__country_id
+msgid "Country"
+msgstr "Страна"
+
+#. module: music
+#: model:ir.model,name:music.model_import_music_wizard
+msgid "Create Music Wizard"
+msgstr "Создание музыки"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__create_uid
+#: model:ir.model.fields,field_description:music.field_api_artist__create_uid
+#: model:ir.model.fields,field_description:music.field_api_group__create_uid
+#: model:ir.model.fields,field_description:music.field_api_song__create_uid
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__create_uid
+msgid "Created by"
+msgstr " Создан"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__create_date
+#: model:ir.model.fields,field_description:music.field_api_artist__create_date
+#: model:ir.model.fields,field_description:music.field_api_group__create_date
+#: model:ir.model.fields,field_description:music.field_api_song__create_date
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__create_date
+msgid "Created on"
+msgstr "Создано"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__release_date
+msgid "Date of release"
+msgstr "Дата релиза"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__display_name
+#: model:ir.model.fields,field_description:music.field_api_artist__display_name
+#: model:ir.model.fields,field_description:music.field_api_group__display_name
+#: model:ir.model.fields,field_description:music.field_api_song__display_name
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_song__duration
+msgid "Duration"
+msgstr "Продолжительность"
+
+#. module: music
+#: model:ir.model.fields.selection,name:music.selection__api_artist__sex__female
+msgid "Female"
+msgstr "Женщина"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__file
+msgid "File"
+msgstr "Файл"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.action_upload_file
+msgid "Files"
+msgstr "Файлы"
+
+#. module: music
+#: model:ir.model,name:music.model_api_group
+#: model:ir.model.fields,field_description:music.field_api_album__album_group_id
+#: model:ir.model.fields,field_description:music.field_api_artist__artist_group_id
+#: model:ir.model.fields,field_description:music.field_api_song__song_group_ids
+msgid "Group"
+msgstr "Группа"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.group_action
+#: model:ir.ui.menu,name:music.group_root_item
+#: model_terms:ir.ui.view,arch_db:music.group_form_view
+msgid "Groups"
+msgstr "Группы"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.group_tree_view
+msgid "Groups info"
+msgstr "Информация о группах"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__id
+#: model:ir.model.fields,field_description:music.field_api_artist__id
+#: model:ir.model.fields,field_description:music.field_api_group__id
+#: model:ir.model.fields,field_description:music.field_api_song__id
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.song_tree_view
+msgid "Info about songs"
+msgstr "Информация о песнях"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album____last_update
+#: model:ir.model.fields,field_description:music.field_api_artist____last_update
+#: model:ir.model.fields,field_description:music.field_api_group____last_update
+#: model:ir.model.fields,field_description:music.field_api_song____last_update
+#: model:ir.model.fields,field_description:music.field_import_music_wizard____last_update
+msgid "Last Modified on"
+msgstr "Последнее обновление"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__write_uid
+#: model:ir.model.fields,field_description:music.field_api_artist__write_uid
+#: model:ir.model.fields,field_description:music.field_api_group__write_uid
+#: model:ir.model.fields,field_description:music.field_api_song__write_uid
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Последнее обновление"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__write_date
+#: model:ir.model.fields,field_description:music.field_api_artist__write_date
+#: model:ir.model.fields,field_description:music.field_api_group__write_date
+#: model:ir.model.fields,field_description:music.field_api_song__write_date
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__write_date
+msgid "Last Updated on"
+msgstr "Последнее обновление"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_song__listeners
+msgid "Listeners"
+msgstr "Слушатели"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.song_kanban_view
+msgid "Listeners:"
+msgstr "Слушатели:"
+
+#. module: music
+#: model:ir.ui.menu,name:music.wiz_group_root_item
+msgid "Load file"
+msgstr "Загрузить файл"
+
+#. module: music
+#: model:ir.model.fields.selection,name:music.selection__api_artist__sex__male
+msgid "Male"
+msgstr "Мужчина"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__month_listeners
+#: model:ir.model.fields,field_description:music.field_api_group__month_listeners
+msgid "Month listeners"
+msgstr "Слушателей в месяц"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.artist_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.group_kanban_view
+msgid "Month listeners:"
+msgstr "Слушателей в месяц:"
+
+#. module: music
+#: model:ir.ui.menu,name:music.music_root_item
+msgid "Music"
+msgstr "Музыка"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__name
+#: model:ir.model.fields,field_description:music.field_api_artist__name
+#: model:ir.model.fields,field_description:music.field_api_group__name
+#: model:ir.model.fields,field_description:music.field_api_song__name
+msgid "Name"
+msgstr "Имя"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.album_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.artist_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.group_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.song_kanban_view
+msgid "Name:"
+msgstr "Имя:"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.album_kanban_view
+msgid "Release date:"
+msgstr "Дата релиза:"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__sex
+msgid "Sex"
+msgstr "Пол"
+
+#. module: music
+#: model:ir.model,name:music.model_api_song
+#: model:ir.model.fields,field_description:music.field_api_album__song_ids
+#: model:ir.model.fields,field_description:music.field_api_artist__song_ids
+#: model:ir.model.fields,field_description:music.field_api_group__song_ids
+msgid "Song"
+msgstr "Песня"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.action_song
+#: model:ir.ui.menu,name:music.song_root_item
+#: model_terms:ir.ui.view,arch_db:music.song_form_view
+msgid "Songs"
+msgstr "Песни"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.music_form_upload_file
+msgid "Upload file"
+msgstr "Загрузить файл"
+
+#. module: music
+#: model:ir.model.fields.selection,name:music.selection__api_artist__sex__other
+msgid "other"
+msgstr "другое"

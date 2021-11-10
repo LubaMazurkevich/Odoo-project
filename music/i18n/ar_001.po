@@ -1,0 +1,279 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* music
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-10 08:03+0000\n"
+"PO-Revision-Date: 2021-11-10 12:12+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Language: ar_BH\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__age
+msgid "Age"
+msgstr "العمر"
+
+#. module: music
+#: model:ir.model,name:music.model_api_album
+#: model:ir.model.fields,field_description:music.field_api_artist__album_ids
+#: model:ir.model.fields,field_description:music.field_api_group__album_ids
+#: model:ir.model.fields,field_description:music.field_api_song__album_id
+msgid "Album"
+msgstr "الألبوم"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.album_action
+#: model:ir.ui.menu,name:music.album_root_item
+#: model_terms:ir.ui.view,arch_db:music.album_form_view
+msgid "Albums"
+msgstr "ألبومات"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.album_tree_view
+msgid "Albums info"
+msgstr "ألبومات معلومات"
+
+#. module: music
+#: model:ir.model,name:music.model_api_artist
+#: model:ir.model.fields,field_description:music.field_api_album__artist_id
+#: model:ir.model.fields,field_description:music.field_api_group__artist_ids
+#: model:ir.model.fields,field_description:music.field_api_song__artist_ids
+msgid "Artist"
+msgstr "فنان"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.artist_action
+#: model:ir.ui.menu,name:music.artist_root_item
+#: model_terms:ir.ui.view,arch_db:music.artist_form_view
+msgid "Artists"
+msgstr "الفنانون"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.artist_tree_view
+msgid "Artists info"
+msgstr "الفنانين معلومات"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.music_form_upload_file
+msgid "Cancel"
+msgstr "إلغاء الأمر"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__country_id
+msgid "Country"
+msgstr "البلد"
+
+#. module: music
+#: model:ir.model,name:music.model_import_music_wizard
+msgid "Create Music Wizard"
+msgstr "إنشاء معالج موسيقى"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__create_uid
+#: model:ir.model.fields,field_description:music.field_api_artist__create_uid
+#: model:ir.model.fields,field_description:music.field_api_group__create_uid
+#: model:ir.model.fields,field_description:music.field_api_song__create_uid
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__create_uid
+msgid "Created by"
+msgstr "تم إنشاؤه بواسطة"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__create_date
+#: model:ir.model.fields,field_description:music.field_api_artist__create_date
+#: model:ir.model.fields,field_description:music.field_api_group__create_date
+#: model:ir.model.fields,field_description:music.field_api_song__create_date
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__create_date
+msgid "Created on"
+msgstr "تم إنشاؤه بواسطة"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__release_date
+msgid "Date of release"
+msgstr "تاريخ الإصدارتاريخ الإصدار"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__display_name
+#: model:ir.model.fields,field_description:music.field_api_artist__display_name
+#: model:ir.model.fields,field_description:music.field_api_group__display_name
+#: model:ir.model.fields,field_description:music.field_api_song__display_name
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_song__duration
+msgid "Duration"
+msgstr "المدة"
+
+#. module: music
+#: model:ir.model.fields.selection,name:music.selection__api_artist__sex__female
+msgid "Female"
+msgstr "أنثى"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__file
+msgid "File"
+msgstr "ملف"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.action_upload_file
+msgid "Files"
+msgstr "الملفات"
+
+#. module: music
+#: model:ir.model,name:music.model_api_group
+#: model:ir.model.fields,field_description:music.field_api_album__album_group_id
+#: model:ir.model.fields,field_description:music.field_api_artist__artist_group_id
+#: model:ir.model.fields,field_description:music.field_api_song__song_group_ids
+msgid "Group"
+msgstr "المجموعة"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.group_action
+#: model:ir.ui.menu,name:music.group_root_item
+#: model_terms:ir.ui.view,arch_db:music.group_form_view
+msgid "Groups"
+msgstr "المجموعات"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.group_tree_view
+msgid "Groups info"
+msgstr "المجموعات في"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__id
+#: model:ir.model.fields,field_description:music.field_api_artist__id
+#: model:ir.model.fields,field_description:music.field_api_group__id
+#: model:ir.model.fields,field_description:music.field_api_song__id
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.song_tree_view
+msgid "Info about songs"
+msgstr "معلومات عن الأغاني"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album____last_update
+#: model:ir.model.fields,field_description:music.field_api_artist____last_update
+#: model:ir.model.fields,field_description:music.field_api_group____last_update
+#: model:ir.model.fields,field_description:music.field_api_song____last_update
+#: model:ir.model.fields,field_description:music.field_import_music_wizard____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل على"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__write_uid
+#: model:ir.model.fields,field_description:music.field_api_artist__write_uid
+#: model:ir.model.fields,field_description:music.field_api_group__write_uid
+#: model:ir.model.fields,field_description:music.field_api_song__write_uid
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__write_date
+#: model:ir.model.fields,field_description:music.field_api_artist__write_date
+#: model:ir.model.fields,field_description:music.field_api_group__write_date
+#: model:ir.model.fields,field_description:music.field_api_song__write_date
+#: model:ir.model.fields,field_description:music.field_import_music_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث على"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_song__listeners
+msgid "Listeners"
+msgstr "المستمعون"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.song_kanban_view
+msgid "Listeners:"
+msgstr "المستمعون:"
+
+#. module: music
+#: model:ir.ui.menu,name:music.wiz_group_root_item
+msgid "Load file"
+msgstr "تحميل الملف"
+
+#. module: music
+#: model:ir.model.fields.selection,name:music.selection__api_artist__sex__male
+msgid "Male"
+msgstr "ذكر"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__month_listeners
+#: model:ir.model.fields,field_description:music.field_api_group__month_listeners
+msgid "Month listeners"
+msgstr "الشهر المستمعين"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.artist_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.group_kanban_view
+msgid "Month listeners:"
+msgstr "الشهر المستمعين:"
+
+#. module: music
+#: model:ir.ui.menu,name:music.music_root_item
+msgid "Music"
+msgstr "موسيقى"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_album__name
+#: model:ir.model.fields,field_description:music.field_api_artist__name
+#: model:ir.model.fields,field_description:music.field_api_group__name
+#: model:ir.model.fields,field_description:music.field_api_song__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.album_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.artist_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.group_kanban_view
+#: model_terms:ir.ui.view,arch_db:music.song_kanban_view
+msgid "Name:"
+msgstr "الاسم:"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.album_kanban_view
+msgid "Release date:"
+msgstr "تاريخ الإصدار:"
+
+#. module: music
+#: model:ir.model.fields,field_description:music.field_api_artist__sex
+msgid "Sex"
+msgstr "الجنس"
+
+#. module: music
+#: model:ir.model,name:music.model_api_song
+#: model:ir.model.fields,field_description:music.field_api_album__song_ids
+#: model:ir.model.fields,field_description:music.field_api_artist__song_ids
+#: model:ir.model.fields,field_description:music.field_api_group__song_ids
+msgid "Song"
+msgstr "نشيد"
+
+#. module: music
+#: model:ir.actions.act_window,name:music.action_song
+#: model:ir.ui.menu,name:music.song_root_item
+#: model_terms:ir.ui.view,arch_db:music.song_form_view
+msgid "Songs"
+msgstr "الأغاني"
+
+#. module: music
+#: model_terms:ir.ui.view,arch_db:music.music_form_upload_file
+msgid "Upload file"
+msgstr "تحميل الملف"
+
+#. module: music
+#: model:ir.model.fields.selection,name:music.selection__api_artist__sex__other
+msgid "other"
+msgstr "أخرى"
