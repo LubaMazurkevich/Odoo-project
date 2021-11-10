@@ -1,5 +1,4 @@
 from odoo import models, fields
-from odoo.exceptions import UserError
 
 
 class MusicUpdateArtistWizard(models.TransientModel):
@@ -12,4 +11,9 @@ class MusicUpdateArtistWizard(models.TransientModel):
     song_listeners = fields.Integer(string="Song listeners")
 
     def update_artist_wizard(self):
-        self.env["api.group"].browse(self._context.get("active_ids")).update({"name": self.name, "song_ids": self.song_ids,"song_listeners ": self.song_listeners })
+        song_listeners = 0
+        for song in self.song_ids:
+            song_listeners += song.listeners
+        self.env["api.artist"].browse(self._context.get("active_ids")).update({"name": self.name, "song_ids": self.song_ids, "song_listeners": song_listeners })
+
+

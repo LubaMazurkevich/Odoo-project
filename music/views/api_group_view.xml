@@ -50,7 +50,6 @@
         <field name="model">api.group</field>
         <field name="arch" type="xml">
             <tree string="Groups info">
-            <button name="action_wiz_redact" string="Redact" type="object"/>
                 <field name="name"/>
                 <field name="month_listeners"/>
                 <field name="artist_ids"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="music_tree_update_artist" model="ir.ui.view">
-            <field name="name">music.update.artist.wizard.tree</field>
+        <record id="music_form_update_artist" model="ir.ui.view">
+            <field name="name">music.update.artist.wizard.form</field>
             <field name="model">music.update.artist.wizard</field>
             <field name="arch" type="xml">
-                <form string="Create New Music">
+                <form string="Redact Music">
                     <group>
                         <field name="name"/>
                         <field name="song_ids"/>
@@ -17,5 +17,5 @@
                 </form>
             </field>
         </record>
-</data>
+    </data>
 </odoo>

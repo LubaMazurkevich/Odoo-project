@@ -35,15 +35,4 @@ class ApiGroup(models.Model):
             res = super(ApiGroup, self).write(vals)
             return res
 
-    def action_wiz_redact(self):
-        return {"type": "ir.actions.act_window",
-                "res_model": "music.update.text.wizard",
-                "view_mode": "form",
-                "target": "new",
-                "context": {"name": self.name,
-                 "month_listeners": self.month_listeners,
-                 "artist_ids": self.artist_ids,
-                 "song_ids": self.song_ids,
-                 "album_ids": self.album_ids},
-                }
 

@@ -7,8 +7,8 @@
              "wizards/import_music_wizard_view.xml",
              "views/api_group_view.xml",
              "views/menuitem_view.xml",
-             "wizards/music_update_text_wizard_view.xml",
-             "data/group_data.xml"],
+             "data/group_data.xml",
+             "wizards/music_update_artist_wizard_view.xml"],
     "depends": [],
 }
 
