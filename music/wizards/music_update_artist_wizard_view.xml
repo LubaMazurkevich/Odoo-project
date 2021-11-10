@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="music_tree_update_artist" model="ir.ui.view">
+            <field name="name">music.update.artist.wizard.tree</field>
+            <field name="model">music.update.artist.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create New Music">
+                    <group>
+                        <field name="name"/>
+                        <field name="song_ids"/>
+                    </group>
+                    <footer>
+                        <button name="update_artist_wizard" type="object" string="Update"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+</data>
+</odoo>

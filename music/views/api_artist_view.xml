@@ -21,6 +21,7 @@
                     <field name="album_ids"/>
                     <field name="song_ids"/>
                     <field name="artist_group_id"/>
+                    <field name="song_listeners"/>
                 </group>
             </form>
         </field>
@@ -31,6 +32,7 @@
         <field name="model">api.artist</field>
         <field name="arch" type="xml">
             <tree string="Artists info">
+            <button name="action_artist_redact" string="Redact" type="object"/>
                 <field name="name"/>
                 <field name="age"/>
                 <field name="sex"/>
@@ -39,6 +41,7 @@
                 <field name="album_ids"/>
                 <field name="song_ids"/>
                 <field name="artist_group_id"/>
+                <field name="song_listeners"/>
             </tree>
         </field>
     </record>

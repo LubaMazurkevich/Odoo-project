@@ -21,6 +21,8 @@ class ApiArtist(models.Model):
     song_ids = fields.Many2many(comodel_name="api.song", string="Song")
     artist_group_id = fields.Many2one(comodel_name="api.group", string="Group")
 
+    song_listeners = fields.Integer(string="Song listeners", compute="_compute_total")
+
     @api.model
     def create(self, vals):
         """
@@ -41,6 +43,24 @@ class ApiArtist(models.Model):
         else:
             res = super(ApiArtist, self).write(vals)
             return res
+
+    def action_artist_redact(self):
+        return {"type": "ir.actions.act_window",
+                "res_model": "music.update.artist.wizard",
+                "view_mode": "form",
+                "target": "new",
+                "context": {"default_name": self.name,
+                            "default_song_ids": self.song_ids.ids,
+                            "default_song_listeners": self.song_listeners}
+                }
+
+    @api.depends("song_ids.listeners")
+    def _compute_total(self):
+        for record in self:
+            record.song_listeners += sum(record.song_ids.mapped("listeners"))
+
+
+
 
 
 
