@@ -21,7 +21,7 @@ class ApiArtist(models.Model):
     song_ids = fields.Many2many(comodel_name="api.song", string="Song")
     artist_group_id = fields.Many2one(comodel_name="api.group", string="Group")
 
-    song_listeners = fields.Integer(string="Song listeners", compute="_compute_total", store=True)
+    song_listeners = fields.Float(string="Song listeners", compute="_compute_total", store=True)
 
     @api.model
     def create(self, vals):
