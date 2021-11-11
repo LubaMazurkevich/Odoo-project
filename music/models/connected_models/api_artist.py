@@ -21,7 +21,7 @@ class ApiArtist(models.Model):
     song_ids = fields.Many2many(comodel_name="api.song", string="Song")
     artist_group_id = fields.Many2one(comodel_name="api.group", string="Group")
 
-    song_listeners = fields.Integer(string="Song listeners")
+    song_listeners = fields.Integer(string="Song listeners", compute="_compute_total", store=True)
 
     @api.model
     def create(self, vals):
@@ -53,4 +53,7 @@ class ApiArtist(models.Model):
                             "default_song_ids": self.song_ids.ids}
                 }
 
-
+    @api.depends("song_ids.listeners")
+    def _compute_total(self):
+        for record in self:
+            record.song_listeners += sum(record.song_ids.mapped("listeners"))
