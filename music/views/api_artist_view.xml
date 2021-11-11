@@ -32,7 +32,7 @@
         <field name="model">api.artist</field>
         <field name="arch" type="xml">
             <tree string="Artists info">
-                <button name="action_artist_redact" string="Redact" type="object"/>
+                <button name="action_artist_redact" string="Redact" type="object" class="oe_highlight"/>
                 <field name="name"/>
                 <field name="age"/>
                 <field name="sex"/>
