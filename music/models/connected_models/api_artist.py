@@ -1,4 +1,4 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
@@ -56,4 +56,4 @@ class ApiArtist(models.Model):
     @api.depends("song_ids.listeners")
     def _compute_total(self):
         for record in self:
-            record.song_listeners += sum(record.song_ids.mapped("listeners"))
+            record.song_listeners = sum(record.song_ids.mapped("listeners"))
